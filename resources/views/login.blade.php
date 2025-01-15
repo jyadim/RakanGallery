@@ -45,7 +45,7 @@
 
     <p class="mt-10 text-center text-sm/6 text-gray-500">
      doesnt have an account?
-      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign Up</a>
+      <a href="/register" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign Up</a>
     </p>
   </div>
 </div>

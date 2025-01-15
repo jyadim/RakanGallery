@@ -43,7 +43,7 @@ class loginController extends Controller
     
     
         public function register(){
-            return view('regist');
+            return view('register');
            
         }
     public function processRegister(Request $request)
