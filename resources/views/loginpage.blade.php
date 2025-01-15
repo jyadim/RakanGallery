@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
 </head>
+
 <body>
-  
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
@@ -42,11 +44,11 @@
     </form>
 
     <p class="mt-10 text-center text-sm/6 text-gray-500">
-      Not a member?
-      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Start a 14 day free trial</a>
+     doesnt have an account?
+      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign Up</a>
     </p>
   </div>
 </div>
-
 </body>
+
 </html>
