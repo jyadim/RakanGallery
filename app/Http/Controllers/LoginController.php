@@ -23,25 +23,29 @@ class LoginController extends Controller
 public function authenticate(Request $request)
 {
     $validator = Validator::make($request->all(), [
-        'email' => 'required|string',
-        'password' => 'required',
+        'email' => 'required|string|email',
+        'password' => 'required|string|min:8',
     ]);
 
     if ($validator->fails()) {
+        // Return to the login page with validation errors
         return redirect()->route('guest.login')
                          ->withInput()
                          ->withErrors($validator);
     }
 
+    // Check if the email and password are correct
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        return redirect()->route('guest.dashboard');
+        // Authentication passed, redirect to the dashboard
+        return redirect()->route('dashboard');
     } else {
+        // Authentication failed, return with an error message
         return redirect()->route('guest.login')
                          ->withInput()
-                         ->with('error', 'Either username or password is incorrect.');
+                         ->with('error', 'The provided credentials do not match our records.');
     }
-    
 }
+
 
 
     public function register(){

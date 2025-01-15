@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+
 
 // Default route to redirect to the login page
 Route::get('/', function () {
@@ -20,7 +22,7 @@ Route::prefix('user')->group(function () {
 
     // Authenticated routes (dashboard, logout)
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('dashboard', [LoginController::class, 'dashboard'])->name('dashboard'); // Corrected to point to dashboard method
+        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     });
 });
