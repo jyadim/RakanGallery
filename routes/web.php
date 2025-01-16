@@ -26,7 +26,7 @@ Route::prefix('user')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-        Route::get('profle', [ProfileController::class, 'index'])->name('profile');
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 
     });
 });
