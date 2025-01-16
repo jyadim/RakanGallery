@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('photos', function (Blueprint $table) {
             $table->unsignedBigInteger('album_id');
             $table->foreign('album_id')->references('album_id')->on('albums')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
