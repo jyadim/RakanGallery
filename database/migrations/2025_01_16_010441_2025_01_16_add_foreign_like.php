@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('like', function (Blueprint $table) {
+            $table->unsignedBigInteger('photo_id');
+            $table->foreign('photo_id')->references('photo_id')->on('photos')->onDelete('cascade');
+        });
     }
 
     /**

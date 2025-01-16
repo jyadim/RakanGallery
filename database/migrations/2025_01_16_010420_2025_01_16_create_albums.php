@@ -11,7 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('albums', function (Blueprint $table) {
+            $table->id('album_id');
+            $table->string('album_name');
+            $table->text('desc');
+            $table->date('upload_date');
+            $table->timestamps();
+        });
     }
 
     /**

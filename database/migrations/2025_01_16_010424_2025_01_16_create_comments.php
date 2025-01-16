@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-    }
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id('comments_id');
+            $table->text('comments');
+            $table->date('upload_date');
+            $table->timestamps();
+        });    }
 
     /**
      * Reverse the migrations.
