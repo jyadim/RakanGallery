@@ -10,5 +10,16 @@ class Photo extends Model
     {
         return $this->belongsTo(User::class, 'id');
     }
-    public function 
+    public function Like()
+    {
+        return $this->hasMany(Like::class, 'photo_id');
+    }
+    public function Comment()
+    {
+        return $this->hasMany(Comment::class, 'photo_id');
+    }
+    public function Album()
+    {
+        return $this->belongsTo(Album::class, 'album_id');
+    }
 }
