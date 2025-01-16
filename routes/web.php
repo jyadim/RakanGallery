@@ -27,6 +27,8 @@ Route::prefix('user')->group(function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('edit/profile', [ProfileController::class, 'edit'])->name('edit.profile');
+        Route::get('edit/profile/proccess', [ProfileController::class, 'edit_proccess'])->name('edit.profile');
 
     });
 });
