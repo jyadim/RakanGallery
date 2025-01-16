@@ -12,7 +12,7 @@ class AlbumController extends Controller
    public function index($slug)
    {
        // Retrieve the album by slug
-       $album = Album::where('slug', $slug)->first();
+       $album = Album::where('slug', $slug)->firstOrFail();
    
        // Check if the album exists
        if (!$album) {
@@ -21,7 +21,7 @@ class AlbumController extends Controller
    
        // Retrieve all photos associated with the album
        $photos = $album->photo;  // This uses the 'photos' relationship defined earlier
-       dd($photos);
+       
 
        // If there are no photos, show a message
        if ($photos->isEmpty()) {

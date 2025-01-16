@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
+    protected $fillable = [''];
     public function User()
     {
         return $this->belongsTo(User::class, 'id');
