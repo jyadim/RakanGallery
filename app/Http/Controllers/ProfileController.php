@@ -10,4 +10,12 @@ class ProfileController extends Controller
         $profile = User::get();
         return view('profile', compact('profile'));
     }
+    public function edit(){
+       
+        return view('editprofile');
+    }
+    public function edit_proccess(){
+       
+        
+    }
 }
