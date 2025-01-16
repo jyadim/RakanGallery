@@ -25,6 +25,7 @@ Route::prefix('user')->group(function () {
     // Authenticated routes (dashboard, logout)
     Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
+        Route::get('album/{slug}', [AlbumController::class, 'index'])->name('album.index'); 
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit/profile', [ProfileController::class, 'edit'])->name('edit.profile');
