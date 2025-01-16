@@ -17,6 +17,7 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    
     protected $fillable = [
         'name',
         'email',
@@ -24,7 +25,23 @@ class User extends Authenticatable
         'username',
         'address'
     ];
-
+  
+    public function Like()
+    {
+        return $this->hasMany(Like::class, 'id');
+    }
+    public function Comment()
+    {
+        return $this->hasMany(Comment::class, 'id');
+    }
+    public function Album()
+    {
+        return $this->hasMany(Album::class, 'id');
+    }
+    public function Photo()
+    {
+        return $this->hasMany(Photo::class, 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
