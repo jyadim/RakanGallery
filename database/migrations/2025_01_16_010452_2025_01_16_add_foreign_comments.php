@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->unsignedBigInteger('photo_id');
-            $table->foreign('photo_id')->references('photo_id')->on('photos')->onDelete('cascade');
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

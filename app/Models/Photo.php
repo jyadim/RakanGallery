@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Photo extends Model
 {
-    protected $fillable = [''];
+    protected $fillable = ['photo_name', 'photo_desc', 'upload_date', 'image_path', 'album_id', 'id'];
     public function User()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function Like()
     {

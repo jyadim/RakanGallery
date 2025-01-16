@@ -24,8 +24,7 @@ class ProfileController extends Controller
                 'username' => 'required|string|max:255',
                 'address' => 'required|string',
                 'status' => 'required|string',
-                'profile' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-                'cover' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+                'profile' => 'nullable|image|mimes:jpg,jpeg,png,gif',
             ]);
         
             $user = auth()->user();
@@ -41,10 +40,7 @@ class ProfileController extends Controller
             }
         
             // Handle Cover Image Upload
-            if ($request->hasFile('cover')) {
-                $coverPath = $request->file('cover')->store('covers', 'public');
-                $user->image_cover_path = $coverPath;
-            }
+           
         
             $user->save();
         
@@ -63,7 +59,7 @@ class ProfileController extends Controller
             $album->album_name = $validated['album_title'];
             $album->desc = $validated['desc'];
             $album->upload_date = $now->format('Y-m-d');
-            $album->id = auth()->id();
+            $album->user_id = auth()->id();
             $album->slug = Str::slug($validated['album_title']);
        
         
