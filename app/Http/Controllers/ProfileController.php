@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Album;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 class ProfileController extends Controller
 {
     public function index(){
@@ -63,6 +64,7 @@ class ProfileController extends Controller
             $album->desc = $validated['desc'];
             $album->upload_date = $now->format('Y-m-d');
             $album->id = auth()->id();
+            $album->slug = Str::slug($validated['album_title']);
        
         
             // Handle Profile Image Upload

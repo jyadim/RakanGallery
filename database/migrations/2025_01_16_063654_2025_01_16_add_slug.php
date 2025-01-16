@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
 
-            $table->string('image_cover_path');
-        });    }
-    
+        Schema::table('photos', function (Blueprint $table) {
+
+            $table->string('slug')->unique;
+        });   
+        Schema::table('albums', function (Blueprint $table) {
+
+            $table->string('slug')->unique;
+        });     
+    }
 
     /**
      * Reverse the migrations.
