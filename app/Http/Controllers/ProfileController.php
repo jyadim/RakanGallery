@@ -14,21 +14,21 @@ class ProfileController extends Controller
        
         return view('editprofile');
     }
-    public function edit_proccess(){
-       
+    public function edit_proccess(Request $request){
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'username' => 'required|string|max:255',
                 'address' => 'required|string',
+                'status' => 'required|string',
                 'profile' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
                 'cover' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
             ]);
         
             $user = auth()->user();
-            $user->first_name = $validated['first_name'];
-            $user->last_name = $validated['last_name'];
-            $user->sex = $validated['sex'];
-            $user->dob = $validated['dob'];
+            $user->name = $validated['name'];
+            $user->username = $validated['username'];
+            $user->address = $validated['address'];
+            $user->status = $validated['status'];
         
             // Handle Profile Image Upload
             if ($request->hasFile('profile')) {

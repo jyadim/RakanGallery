@@ -23,8 +23,7 @@
                 @foreach ($profile as $item)
                     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-1">{{ $item->name }}</h1>
                     <p class="text-indigo-600 dark:text-indigo-400 font-semibold mb-4">{{$item->username}}</p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Passionate about creating user-friendly web
-                        applications and solving complex problems.</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{$item->status}}</p>
                 @endforeach
                 <div class="px-16 flex items-center gap-x-2">
                     <!-- Form untuk Logout -->
@@ -49,7 +48,7 @@ Edit Profile
     
     <!-- Edit Profile Form -->
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{route('edit.profile.proccess')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <section class="py-10 my-auto dark:bg-gray-900">
                 <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
@@ -79,11 +78,11 @@ Edit Profile
                         <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                             <div class="w-full  mb-4 mt-6">
                                 <label for="name" class="mb-2 dark:text-gray-300">Name</label>
-                                <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="First Name">
+                                <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Name">
                             </div>
                             <div class="w-full  mb-4 lg:mt-6">
                                 <label for="username" class=" dark:text-gray-300">Username</label>
-                                <input type="text" name="username" id="username" value="{{ old('username', auth()->user()->username) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Last Name">
+                                <input type="text" name="username" id="username" value="{{ old('username', auth()->user()->username) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Username">
                             </div>
                         </div>
         
@@ -92,7 +91,11 @@ Edit Profile
                             
                             <div class="w-full  mb-4 lg:mt-6">
                                 <label for="address" class=" dark:text-gray-300">address</label>
-                                <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Last Name">
+                                <input type="text" name="address" id="address" value="{{ old('address', auth()->user()->address) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Address">
+                            </div>
+                            <div class="w-full  mb-4 lg:mt-6">
+                                <label for="status" class=" dark:text-gray-300">Bio</label>
+                                <input type="text" name="status" id="status" value="{{ old('status', auth()->user()->status) }}" class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800" placeholder="Bio">
                             </div>
                         </div>
         
@@ -105,7 +108,6 @@ Edit Profile
             </section>
         </form>
         
-    </form>
 </div>
 
 <!-- Modal Script -->
