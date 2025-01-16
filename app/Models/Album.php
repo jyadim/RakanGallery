@@ -10,4 +10,8 @@ class Album extends Model
     {
         return $this->belongsTo(User::class, 'id');
     }
+    public function photo()
+    {
+        return $this->hasMany(Photo::class, 'album_id');
+    }
 }
