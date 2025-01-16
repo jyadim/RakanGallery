@@ -10,7 +10,8 @@ class ProfileController extends Controller
 {
     public function index(){
         $profile = User::get();
-        return view('profile', compact('profile'));
+        $album = Album::with('User')->latest()->get();
+        return view('profile', compact('profile', 'album'));
     }
     public function edit(){
        
