@@ -51,7 +51,7 @@ Edit Profile
 
         <form action="{{route('edit.profile.proccess')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <section class="py-10 my-auto dark:bg-gray-900">
+            <section class="py-16 my-auto dark:bg-gray-900">
                 <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
                     <div class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
                         <h1 class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
@@ -64,7 +64,7 @@ Edit Profile
                             <!-- Profile Image -->
                             <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative" id="profile-image-container">
                                 <!-- Profile Image Preview -->
-                                <img id="profile-preview" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Profile Image" class="rounded-full w-full h-full object-cover">
+                                <img id="profile-preview" src="{{ asset('storage/' . old('image_path', auth()->user()->image_path)) }}" alt="Profile Image" class="rounded-full w-full h-full object-cover">
                             
                                 <!-- Input for Image Upload -->
                                 <div class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
