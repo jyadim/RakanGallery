@@ -28,7 +28,7 @@ Route::prefix('user')->group(function () {
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit/profile', [ProfileController::class, 'edit'])->name('edit.profile');
-        Route::post('edit/profile/proccess', [ProfileController::class, 'edit_proccess'])->name('edit.profile');
+        Route::post('edit/profile/proccess', [ProfileController::class, 'edit_proccess'])->name('edit.profile.proccess');
 
     });
 });
