@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Album;
+use Carbon\Carbon;
 class ProfileController extends Controller
 {
     public function index(){
@@ -47,5 +49,27 @@ class ProfileController extends Controller
             return redirect()->route('profile')->with('success', 'Profile updated successfully.');
         }
         
+        public function create_album(Request $request){
+            $validated = $request->validate([
+                'album_title' => 'required|string|max:255',
+                'desc' => 'required|string|max:255',
+                
+            ]);
         
-    }
+            $album = new Album();
+            $now = Carbon::now(); 
+            $album->album_name = $validated['album_title'];
+            $album->desc = $validated['desc'];
+            $album->upload_date = $now->format('Y-m-d');
+            $album->id = auth()->id();
+       
+        
+            // Handle Profile Image Upload
+        
+            $album->save();
+        
+            return redirect()->route('profile')->with('success', 'Album created successfully.');
+        }
+        }
+        
+    

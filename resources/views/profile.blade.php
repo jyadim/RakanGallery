@@ -144,10 +144,54 @@ function previewImage(event) {
     </div>
     
     <div class="flex flex-wrap w-full mb-4 p-4 max-w-screen-xl mx-auto">
-        <div class="w-full mb-6 lg:mb-0">
-            <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">Your Albums</h1>
-            <div class="h-1 w-60 bg-blue-700 rounded"></div>
+        <div class="w-full mb-6 lg:mb-0 flex items-center gap-4">
+            <div>
+                <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">Your Albums</h1>
+                <div class="h-1 w-60 bg-blue-700 rounded"></div>
+            </div>
+            <!-- Button to open the create album form -->
+<button id="openFormButton" class="flex items-center text-indigo-700 border border-indigo-600 py-2 px-6 gap-2 rounded">
+    <span>Add New Album</span>
+    <svg class="w-6 h-6 text-gray-800 dark:text-indigo-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4.243a1 1 0 1 0-2 0V11H7.757a1 1 0 1 0 0 2H11v3.243a1 1 0 1 0 2 0V13h3.243a1 1 0 1 0 0-2H13V7.757Z" clip-rule="evenodd"/>
+    </svg>
+</button>
+
+<!-- Hidden Create Album Form -->
+<div id="createAlbumForm" class="hidden mt-4 p-6 bg-white rounded-lg shadow-md w-full max-w-lg mx-auto">
+    <form action="{{ route('create.album') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-4">
+            <label for="album_title" class="block text-gray-700">Album Title</label>
+            <input type="text" name="album_title" id="album_title" placeholder="Enter Album Title" class="w-full p-4 border border-indigo-600 rounded-lg" required>
         </div>
+        <div class="mb-4">
+            <label for="desc" class="block text-gray-700">Album Desc</label>
+            <input type="text" name="desc" id="desc" placeholder="Enter Album Desc" class="w-full p-4 border border-indigo-600 rounded-lg" required>
+        </div>
+
+        
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">Create Album</button>
+            <button type="button" id="closeFormButton" class="py-2 px-6 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript to toggle form visibility -->
+<script>
+    document.getElementById("openFormButton").addEventListener("click", function() {
+        document.getElementById("createAlbumForm").classList.remove("hidden");
+    });
+
+    document.getElementById("closeFormButton").addEventListener("click", function() {
+        document.getElementById("createAlbumForm").classList.add("hidden");
+    });
+</script>
+
+        </div>
+        
         <div>
 
         </div>

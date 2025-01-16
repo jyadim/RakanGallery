@@ -29,6 +29,7 @@ Route::prefix('user')->group(function () {
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit/profile', [ProfileController::class, 'edit'])->name('edit.profile');
         Route::post('edit/profile/proccess', [ProfileController::class, 'edit_proccess'])->name('edit.profile.proccess');
+        Route::post('create/albums', [ProfileController::class, 'create_album'])->name('create.album');
 
     });
 });
