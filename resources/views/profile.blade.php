@@ -13,14 +13,15 @@
 <body>
     <x-navbar></x-navbar>
     <div class="flex items-center justify-center p-4 mt-16">
+        @foreach ($profile as $item)
         <div
             class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-sm w-full overflow-hidden transition-all duration-300 hover:shadow-indigo-500/50 dark:hover:shadow-blue-900/50">
             <div class="relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700">
-                <img src="https://i.pravatar.cc/300" alt=""
+                <img src="{{ asset('storage/'.$item->image_path) }}" alt=""
                     class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white dark:border-gray-800 transition-transform duration-300 hover:scale-105">
             </div>
             <div class="pt-16 pb-6 px-6 text-center">
-                @foreach ($profile as $item)
+               
                     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-1">{{ $item->name }}</h1>
                     <p class="text-indigo-600 dark:text-indigo-400 font-semibold mb-4">{{$item->username}}</p>
                     <p class="text-gray-600 dark:text-gray-300 mb-4">{{$item->status}}</p>
@@ -59,11 +60,15 @@ Edit Profile
                         <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Edit Profile</h2>
         
                         <!-- Profile and Cover Image -->
-                        <div class="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
+                        <div class="w-full rounded-sm relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700 bg-cover bg-center bg-no-repeat items-center">
                             <!-- Profile Image -->
-                            <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
-                                <div class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4">
-                                    <input type="file" name="profile" id="upload_profile" hidden>
+                            <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative" id="profile-image-container">
+                                <!-- Profile Image Preview -->
+                                <img id="profile-preview" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080" alt="Profile Image" class="rounded-full w-full h-full object-cover">
+                            
+                                <!-- Input for Image Upload -->
+                                <div class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
+                                    <input type="file" name="profile" id="upload_profile" hidden onchange="previewImage(event)">
                                     <label for="upload_profile">
                                         <svg class="w-6 h-5 text-blue-700" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"></path>
@@ -110,12 +115,25 @@ Edit Profile
         
 </div>
 
-<!-- Modal Script -->
+
 <script>
 function toggleModal() {
     const modal = document.getElementById('editModal');
     modal.classList.toggle('hidden');
 }
+function previewImage(event) {
+        const reader = new FileReader();
+        const file = event.target.files[0];
+
+        reader.onload = function(e) {
+            const preview = document.getElementById('profile-preview');
+            preview.src = e.target.result; // Set the preview image source to the selected file
+        };
+
+        if (file) {
+            reader.readAsDataURL(file); // Read the selected file as a Data URL
+        }
+    }
 </script>
 
                 </div>

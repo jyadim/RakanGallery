@@ -33,13 +33,13 @@ class ProfileController extends Controller
             // Handle Profile Image Upload
             if ($request->hasFile('profile')) {
                 $profilePath = $request->file('profile')->store('profiles', 'public');
-                $user->profile_image = $profilePath;
+                $user->image_path = $profilePath;
             }
         
             // Handle Cover Image Upload
             if ($request->hasFile('cover')) {
                 $coverPath = $request->file('cover')->store('covers', 'public');
-                $user->cover_image = $coverPath;
+                $user->image_cover_path = $coverPath;
             }
         
             $user->save();
