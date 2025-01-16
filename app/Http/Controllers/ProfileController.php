@@ -10,8 +10,9 @@ use Illuminate\Support\Str;
 class ProfileController extends Controller
 {
     public function index(){
-        $profile = User::get();
-        $album = Album::with('User')->latest()->get();
+        $profile = User::where('id', auth()->id())->get(); // Hanya ambil data user login
+
+        $album = Album::with('User')->where('user_id', auth()->id())->latest()->get();
         return view('profile', compact('profile', 'album'));
     }
     public function edit(){
