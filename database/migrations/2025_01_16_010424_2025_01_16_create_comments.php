@@ -16,13 +16,14 @@ return new class extends Migration
             $table->text('comments');
             $table->date('upload_date');
             $table->timestamps();
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('comments');
     }
 };

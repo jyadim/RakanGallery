@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
-            $table->id();
-            $table->string('album_name');
-            $table->text('desc');
-            $table->date('upload_date');
-            $table->timestamps();
-        });
+        Schema::table('comments', function (Blueprint $table) {
+
+            $table->unsignedBigInteger('parent_id')->nullable();
+        });   
     }
 
     /**
@@ -25,5 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');    }
+        //
+    }
 };

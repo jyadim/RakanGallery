@@ -50,8 +50,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="photo" class="block text-gray-700">Photo</label>
-                        <input type="file" name="photo" id="photo" placeholder="Enter Album Desc"
-                            class="w-full p-4 border border-indigo-600 rounded-lg" required>
+                        <input type="file" name="photo" id="photo" class="w-full p-4 border border-indigo-600 rounded-lg" required>
                     </div>
 
 
@@ -102,18 +101,16 @@
                 <!-- Info -->
                 <div class="mt-2">
                     <h2 class="text-lg font-semibold">{{ $pict->photo_name }}</h2>
-                    <p>Album ID: {{ $pict->album_id }} | Photo Album ID: {{ $pict->album_id }}</p>
                     <p class="text-sm text-gray-500">{{ $pict->photo_desc ?? 'No description available' }}</p>
                 </div>
                 <!-- Like Button -->
                 <div class="mt-4 flex justify-between items-center">
                     <button onclick="handleLike()" class="flex items-center text-gray-700 hover:text-red-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M14.5 3.5c-.857 0-1.631.34-2.222.933-.592.592-.933 1.365-.933 2.222 0 .858.34 1.632.933 2.223l4.789 4.788-5.455 5.455c-.39.39-.884.61-1.41.61a2 2 0 01-1.41-.586l-5.364-5.363a2 2 0 010-2.828l5.364-5.364a2 2 0 012.828 0l4.788 4.788c.592.592 1.365.933 2.223.933.857 0 1.631-.341 2.223-.933.592-.592.933-1.366.933-2.223 0-.857-.341-1.63-.933-2.222-.592-.592-1.366-.933-2.223-.933z" />
-                        </svg>
-                        <span class="ml-2">Likes</span>
+                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
                     </button>
                 </div>
             </div>
