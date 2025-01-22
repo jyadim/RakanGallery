@@ -244,11 +244,17 @@
             @foreach ($album as $bulma)
                 <div
                     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        <!-- If there is at least one photo -->
+
+                    <!-- If there is one photo -->
+                    @if ($bulma->Photo && $bulma->Photo->isNotEmpty())
+                        <!-- If there is at least one photo, display the first one -->
                         <img class="rounded-t-lg w-full h-48 object-cover"
-                            src="{{ asset('storage/' . $bulma->Photo->first->image_path) }}"
+                            src="{{ asset('storage/' . $bulma->Photo->first()->image_path) }}"
                             alt="Download Image" />
-                        <!-- If there are no photos -->
+                    @else
+                        <!-- If there are no photos, show a message -->
+                        <p class="text-center text-gray-500">No photo available for this album.</p>
+                    @endif
 
                     <div class="p-5">
                         <a href="#">
