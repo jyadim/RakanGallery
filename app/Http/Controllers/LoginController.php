@@ -50,7 +50,7 @@ public function authenticate(Request $request)
 
     public function register(){
         return view('register');
-       
+
     }
     public function processRegister(Request $request)
     {
@@ -61,8 +61,8 @@ public function authenticate(Request $request)
             'password' => 'required|string|min:8|confirmed', // Corrected rules for password
             'email' => 'required|string|email|max:255|unique:users', // Corrected email validation
         ]);
-        
-    
+
+
         if ($validator->fails()) {
             return redirect()
                 ->route('guest.register')
@@ -70,7 +70,7 @@ public function authenticate(Request $request)
                 ->withErrors($validator)
                 ->with('error', 'There are some errors in your input. Please try again.');
         }
-    
+
         // Simpan data user ke database
         $user = new User();
         $user->name = $request->name;
@@ -90,7 +90,7 @@ public function authenticate(Request $request)
                 ->with('error', 'Failed to register. Please try again later.');
         }
     }
-    
+
 public function logout()
 {
     Auth::logout();

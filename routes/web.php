@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PhotoController;
 use App\Models\Album;
+use Illuminate\Support\Facades\Auth;
 
 // Default route to redirect to the login page
 Route::get('/', function () {
@@ -21,12 +22,13 @@ Route::prefix('user')->group(function () {
         Route::post('authenticate', [LoginController::class, 'authenticate'])->name('guest.authenticate');
         Route::get('register', [LoginController::class, 'register'])->name('guest.register');
         Route::post('process-register', [LoginController::class, 'processRegister'])->name('guest.processRegister');
+
     });
 
     // Authenticated routes (dashboard, logout)
     Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
-        Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album'); 
+        Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
         Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
