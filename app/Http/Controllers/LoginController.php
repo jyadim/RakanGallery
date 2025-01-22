@@ -78,7 +78,8 @@ public function authenticate(Request $request)
         $user->password = Hash::make($request->password);
         $user->email = $request->email;
         $user->address = $request->address;
-    
+        $user->verified = false;
+
         if ($user->save()) {
             return redirect()
                 ->route('guest.login')

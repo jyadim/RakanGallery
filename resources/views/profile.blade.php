@@ -17,7 +17,7 @@
             <div
                 class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-sm w-full overflow-hidden transition-all duration-300 hover:shadow-indigo-500/50 dark:hover:shadow-blue-900/50">
                 <div class="relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700">
-                    <img src="{{ $item->image_path ? asset('storage/' . $item->image_path) : asset('storage/profiles/dd9ceee637d0ce0f70f05cf527078a32.jpg') }}"
+                    <img src="{{ $item->image_path ? asset('storage/' . $item->image_path) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
                         alt="Profile Picture"
                         class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-24 h-24 rounded-full border-4 border-white dark:border-gray-800 transition-transform duration-300 hover:scale-105">
                 </div>
@@ -71,9 +71,9 @@
                                     <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative"
                                         id="profile-image-container">
                                         <!-- Profile Image Preview -->
-                                        
+
                                         <img id="profile-preview"
-                                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/dd9ceee637d0ce0f70f05cf527078a32.jpg') }}"
+                                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
                                             alt="Profile Image" class="rounded-full w-full h-full object-cover">
 
                                         <!-- Input for Image Upload -->

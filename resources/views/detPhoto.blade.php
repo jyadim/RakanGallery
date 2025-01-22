@@ -57,15 +57,15 @@
                                 <div class="flex items-start space-x-4 bg-gray-50 rounded-lg p-4 shadow-sm @if($comment->parent_id) ml-10 @endif">
                                     <!-- User Avatar -->
                                     <div class="flex-shrink-0">
-                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/dd9ceee637d0ce0f70f05cf527078a32.jpg') }}" 
-                                             alt="User Avatar" 
+                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                                             alt="User Avatar"
                                              class="w-12 h-12 rounded-full object-cover">
                                     </div>
-                        
+
                                     <!-- Comment Content -->
                                     <div class="flex-1">
                                         <div class="text-sm font-semibold text-gray-800">
-                                            {{ $comment->user->username }} 
+                                            {{ $comment->user->username }}
                                             @if ($comment->parent_id)
                                                 <span class="text-gray-500 text-xs"> Replying to: {{ $comment->parent->user->username }}</span>
                                             @endif
@@ -74,14 +74,14 @@
                                             <i class="fa fa-clock"></i> {{ $comment->created_at->diffForHumans() }}
                                         </div>
                                         <p class="text-sm text-gray-700 whitespace-pre-wrap">{!! nl2br(e($comment->comments)) !!}</p>
-                        
+
                                         <!-- Reply Form -->
                                         <form method="post" action="{{ route('store.comments') }}" class="mt-4">
                                             @csrf
                                             <div class="flex items-start space-x-2">
-                                                <textarea 
-                                                    name="comments" 
-                                                    class="w-full rounded-lg border border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none px-3 py-2 text-sm" 
+                                                <textarea
+                                                    name="comments"
+                                                    class="w-full rounded-lg border border-gray-300 focus:ring focus:ring-blue-300 focus:outline-none px-3 py-2 text-sm"
                                                     placeholder="Write Your Reply..."></textarea>
                                                 <input type="hidden" name="photo_id" value="{{ $photo->id }}">
                                                 <input type="hidden" name="parent_id" value="{{ $comment->id }}">
@@ -90,14 +90,14 @@
                                                 </button>
                                             </div>
                                         </form>
-                        
+
                                         <!-- Display Replies -->
                                         @if ($comment->replies->count())
                                             <div class="mt-4 ml-10 border-l-2 border-gray-200 pl-4 space-y-4">
                                                 @foreach ($comment->replies as $reply)
                                                     <div class="flex items-start space-x-4 bg-gray-100 rounded-lg p-3 shadow-sm">
                                                         <div class="flex-shrink-0">
-                                                            <img src="{{ $reply->User->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/dd9ceee637d0ce0f70f05cf527078a32.jpg') }}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">                                                        </div>
+                                                            <img src="{{ $reply->User->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">                                                        </div>
                                                         <div class="flex-1">
                                                             <div class="text-sm font-semibold text-gray-800">
                                                                 {{ $reply->user->username }}
@@ -115,8 +115,8 @@
                                 </div>
                             @endforeach
                         </div>
-                        
-                        
+
+
 
                     </div>
                 </div>

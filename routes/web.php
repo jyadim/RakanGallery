@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\Admin\AdminController;
+
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +17,12 @@ Route::get('/', function () {
 });
 
 // User routes (login, register, etc.)
+
+Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
+    Route::get('pending-users', [AdminController::class, 'showPendingUsers'])->name('admin.pending-users');
+    Route::post('approve-user/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
+    Route::post('reject-user/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
+});
 Route::prefix('user')->group(function () {
     // Guest-only routes (login, register)
     Route::group(['middleware' => 'guest'], function () {
