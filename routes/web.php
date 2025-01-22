@@ -32,6 +32,9 @@ Route::prefix('user')->group(function () {
         Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
         Route::post('Photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
         Route::delete('Photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
+        Route::put('album/{id}', [AlbumController::class, 'update'])->name('album.update');
+        Route::delete('album/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
+
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('album/{slug}/UploadPhoto', [AlbumController::class, 'upload'])->name('photo.store');

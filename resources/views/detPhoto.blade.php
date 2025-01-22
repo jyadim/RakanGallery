@@ -29,8 +29,23 @@
                     <!-- Product Details -->
                     <div class="w-full md:w-1/2 px-4">
                         <h2 class="text-3xl font-bold mb-2">{{ $photo->photo_name }}</h2>
-                        <p class="text-gray-600 mb-4">{{ $photo->User->username }}</p>
                         <p class="text-gray-700 mb-6">{{ $photo->photo_desc }}</p>
+
+                        <div class="flex items-center space-x-4  mb-6">
+                            <!-- Profile Picture -->
+                            <img src="{{ $photo->user->image_path ? asset('storage/' . old('image_path', $photo->user->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                                alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
+
+                            <!-- User Info -->
+                            <div class="flex-1">
+                                <div class="text-sm font-semibold text-gray-800">
+                                    {{ $photo->user->username }}
+                                </div>
+                                <div class="text-xs text-gray-500">
+                                    <i class="fa fa-clock"></i> {{ $photo->created_at->diffForHumans() }}
+                                </div>
+                            </div>
+                        </div>
 
 
                         <form method="post" action="{{ route('store.comments') }}"

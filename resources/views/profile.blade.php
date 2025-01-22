@@ -242,42 +242,98 @@
     <div class="px-20 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($album as $bulma)
-                <div
-                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
 
-                    <!-- If there is one photo -->
-                    @if ($bulma->Photo && $bulma->Photo->isNotEmpty())
-                        <!-- If there is at least one photo, display the first one -->
-                        <img class="rounded-t-lg w-full h-48 object-cover"
-                            src="{{ asset('storage/' . $bulma->Photo->first()->image_path) }}"
-                            alt="Download Image" />
-                    @else
-                        <!-- If there are no photos, show a message -->
-                        <p class="text-center text-gray-500">No photo available for this album.</p>
-                    @endif
+        <!-- Check if album has at least one photo -->
+        @if ($bulma->Photo && $bulma->Photo->isNotEmpty())
+            <img class="rounded-t-lg w-full h-48 object-cover"
+                src="{{ asset('storage/' . $bulma->Photo->first()->image_path) }}"
+                alt="Download Image" />
+        @else
+            <p class="text-center text-gray-500">No photo available for this album.</p>
+        @endif
 
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                {{ $bulma->album_name }}</h5>
-                        </a>
-                        <div class="flex justify-between items-center">
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $bulma->desc }}</p>
-                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-right">
-                                {{ $bulma->upload_date }}</p>
-                        </div>
-                        <a href="{{ route('detail.album', ['slug' => $bulma->slug]) }}"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            View Album
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                    </div>
+        <div class="p-5">
+            <a href="#">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{ $bulma->album_name }}</h5>
+            </a>
+            <div class="flex justify-between items-center">
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $bulma->desc }}</p>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-right">
+                    {{ $bulma->upload_date }}</p>
+            </div>
+            <a href="{{ route('detail.album', ['slug' => $bulma->slug]) }}"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                View Album
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+            </a>
+
+            <!-- Edit and Delete Buttons -->
+            <div class="flex justify-between mt-4">
+                <!-- Edit Button -->
+                <button onclick="openUpdateForm('{{ $bulma->id }}', '{{ $bulma->album_name }}', '{{ $bulma->desc }}')"
+                    class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                    Edit
+                </button>
+
+                <!-- Delete Button -->
+                <form action="{{ route('album.destroy', ['id' => $bulma->id]) }}" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this album?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Update Form Modal -->
+        <div id="updateForm-{{ $bulma->id }}"
+            class="hidden absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+            <form action="{{ route('album.update', ['id' => $bulma->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-4">
+                    <label class="block text-gray-700">Album Name</label>
+                    <input type="text" name="album_name" value="{{ $bulma->album_name }}"
+                        class="w-full p-4 border border-indigo-600 rounded-lg" required>
                 </div>
-            @endforeach
+                <div class="mb-4">
+                    <label class="block text-gray-700">Description</label>
+                    <input type="text" name="desc" value="{{ $bulma->desc }}"
+                        class="w-full p-4 border border-indigo-600 rounded-lg">
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button type="submit"
+                        class="py-2 px-6 bg-indigo-600 text-white rounded-lg">Update</button>
+                    <button type="button" onclick="closeUpdateForm('{{ $bulma->id }}')"
+                        class="py-2 px-6 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        function openUpdateForm(id, title, desc) {
+            document.getElementById(`updateForm-${id}`).classList.remove("hidden");
+        }
+
+        function closeUpdateForm(id) {
+            document.getElementById(`updateForm-${id}`).classList.add("hidden");
+        }
+    </script>
+@endforeach
+
 
         </div>
     </div>
