@@ -38,6 +38,8 @@ Route::prefix('user')->group(function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
         Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
+        Route::post('Photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
+        Route::delete('Photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('album/{slug}/UploadPhoto', [AlbumController::class, 'upload'])->name('photo.store');

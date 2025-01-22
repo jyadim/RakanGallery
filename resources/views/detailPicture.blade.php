@@ -104,15 +104,49 @@
                     <p class="text-sm text-gray-500">{{ $pict->photo_desc ?? 'No description available' }}</p>
                 </div>
                 <!-- Like Button -->
-                <div class="mt-4 flex justify-between items-center">
-                    <button onclick="handleLike()" class="flex items-center text-gray-700 hover:text-red-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                            </svg>
-                    </button>
-                </div>
+                <!-- Update Button -->
+<button onclick="openUpdateForm('{{ $pict->id }}', '{{ $pict->photo_name }}', '{{ $pict->photo_desc }}')"
+    class="py-2 px-4 bg-yellow-500 text-white rounded-lg">
+    Edit
+</button>
+<!-- Delete Button -->
+<form action="{{ route('photo.destroy', $pict->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this photo?')">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="py-2 px-4 bg-red-600 text-white rounded-lg">Delete</button>
+</form>
+
+<!-- Update Form Modal -->
+<div id="updateForm-{{ $pict->id }}" class="hidden mt-4 p-6 bg-white rounded-lg shadow-md w-full max-w-lg mx-auto">
+    <form action="{{ route('photo.update', $pict->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <input type="hidden" name="photo_id" value="{{ $pict->id }}">
+        <div class="mb-4">
+            <label class="block text-gray-700">Photo Title</label>
+            <input type="text" name="photo_title" value="{{ $pict->photo_name }}" class="w-full p-4 border border-indigo-600 rounded-lg" required>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Description</label>
+            <input type="text" name="desc" value="{{ $pict->photo_desc }}" class="w-full p-4 border border-indigo-600 rounded-lg">
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">Update</button>
+            <button type="button" onclick="closeUpdateForm('{{ $pict->id }}')" class="py-2 px-6 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+        </div>
+    </form>
+</div>
+<script>
+    function openUpdateForm(id, title, desc) {
+        document.getElementById(`updateForm-${id}`).classList.remove("hidden");
+    }
+
+    function closeUpdateForm(id) {
+        document.getElementById(`updateForm-${id}`).classList.add("hidden");
+    }
+</script>
+
             </div>
         @endforeach
     </div>

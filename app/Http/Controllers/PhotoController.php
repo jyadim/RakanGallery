@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -76,4 +77,32 @@ $now = Carbon::now();
 
         return redirect()->back()->with('success', $message);
     }
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'photo_title' => 'required|string|max:255',
+        'desc' => 'nullable|string|max:500',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $photo = Photo::findOrFail($id);
+    $photo->photo_name = $request->photo_title;
+    $photo->photo_desc = $request->desc;
+
+    $photo->save();
+
+    return redirect()->back()->with('success', 'Photo updated successfully.');
+}
+public function destroy($id)
+{
+    $photo = Photo::findOrFail($id);
+
+    // Delete photo file from storage
+    Storage::delete('public/' . $photo->image_path);
+
+    $photo->delete();
+
+    return redirect()->back()->with('success', 'Photo deleted successfully.');
+}
+
 }
