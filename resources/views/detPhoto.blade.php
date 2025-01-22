@@ -57,7 +57,7 @@
                                 <div class="flex items-start space-x-4 bg-gray-50 rounded-lg p-4 shadow-sm @if($comment->parent_id) ml-10 @endif">
                                     <!-- User Avatar -->
                                     <div class="flex-shrink-0">
-                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $comment->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
                                              alt="User Avatar"
                                              class="w-12 h-12 rounded-full object-cover">
                                     </div>

@@ -49,7 +49,7 @@ class PhotoController extends Controller
         $comm->user_id = auth()->id();
 
         $comm->save();
-        return redirect()->route('dashboard')->with('success', 'Comments added successfully.');
+        return redirect()->back()->with('success', 'Comments added successfully.');
     }
 
 

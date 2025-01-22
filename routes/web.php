@@ -16,13 +16,6 @@ Route::get('/', function () {
     return redirect()->route('guest.login'); // Redirect to login page
 });
 
-// User routes (login, register, etc.)
-
-Route::prefix('admin')->middleware('auth', 'admin')->group(function () {
-    Route::get('pending-users', [AdminController::class, 'showPendingUsers'])->name('admin.pending-users');
-    Route::post('approve-user/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
-    Route::post('reject-user/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
-});
 Route::prefix('user')->group(function () {
     // Guest-only routes (login, register)
     Route::group(['middleware' => 'guest'], function () {
@@ -30,12 +23,11 @@ Route::prefix('user')->group(function () {
         Route::post('authenticate', [LoginController::class, 'authenticate'])->name('guest.authenticate');
         Route::get('register', [LoginController::class, 'register'])->name('guest.register');
         Route::post('process-register', [LoginController::class, 'processRegister'])->name('guest.processRegister');
-
     });
 
     // Authenticated routes (dashboard, logout)
     Route::group(['middleware' => 'auth'], function () {
-        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard'); // Corrected to point to dashboard method
+        Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
         Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
         Route::post('Photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
@@ -49,6 +41,6 @@ Route::prefix('user')->group(function () {
         Route::post('create/albums', [ProfileController::class, 'create_album'])->name('create.album');
         Route::post('posts/comments', [PhotoController::class, 'store_comments'])->name('store.comments');
         Route::post('posts/like/{id}', [PhotoController::class, 'like'])->name('photo.like');
-
     });
 });
+

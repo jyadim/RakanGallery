@@ -49,7 +49,7 @@ class AlbumController extends Controller
         $photo->album_id = $album->id;
         $photo->slug = Str::slug($validated['photo_title']);
 
-        
+
 
 
 
