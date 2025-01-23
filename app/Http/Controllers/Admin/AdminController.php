@@ -22,7 +22,7 @@ class AdminController extends Controller
         $user->verified = true;
         $user->save();
 
-        return redirect()->route('AdminApproval')->with('message', 'User approved successfully.');
+        return redirect()->route('admin.dashboard')->with('message', 'User approved successfully.');
     }
 
     public function rejectUser($id)
@@ -31,6 +31,6 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('AdminApproval')->with('message', 'User rejected and deleted.');
+        return redirect()->route('admin.dashboard')->with('message', 'User rejected and deleted.');
     }
 }
