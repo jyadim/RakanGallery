@@ -33,7 +33,7 @@
 
                         <div class="flex items-center space-x-4  mb-6">
                             <!-- Profile Picture -->
-                            <img src="{{ $photo->user->image_path ? asset('storage/' . old('image_path', $photo->user->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                            <img src="{{ $photo->user->image_path ? asset('storage/' . old('image_path', $photo->user->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
                                 alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
 
                             <!-- User Info -->
@@ -72,7 +72,7 @@
                                 <div class="flex items-start space-x-4 bg-gray-50 rounded-lg p-4 shadow-sm @if($comment->parent_id) ml-10 @endif">
                                     <!-- User Avatar -->
                                     <div class="flex-shrink-0">
-                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $comment->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                                        <img src="{{ $comment->user->image_path ? asset('storage/' . old('image_path', $comment->User->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
                                              alt="User Avatar"
                                              class="w-12 h-12 rounded-full object-cover">
                                     </div>
@@ -112,7 +112,7 @@
                                                 @foreach ($comment->replies as $reply)
                                                     <div class="flex items-start space-x-4 bg-gray-100 rounded-lg p-3 shadow-sm">
                                                         <div class="flex-shrink-0">
-                                                            <img src="{{ $reply->User->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">                                                        </div>
+                                                            <img src="{{ $reply->User->image_path ? asset('storage/' . old('image_path', $reply->User->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}" alt="User Avatar" class="w-12 h-12 rounded-full object-cover">                                                        </div>
                                                         <div class="flex-1">
                                                             <div class="text-sm font-semibold text-gray-800">
                                                                 {{ $reply->user->username }}

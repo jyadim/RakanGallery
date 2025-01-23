@@ -73,7 +73,7 @@
                                         <!-- Profile Image Preview -->
 
                                         <img id="profile-preview"
-                                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
                                             alt="Profile Image" class="rounded-full w-full h-full object-cover">
 
                                         <!-- Input for Image Upload -->

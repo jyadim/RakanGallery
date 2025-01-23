@@ -66,7 +66,7 @@
 
                     <!-- User Information -->
                     <div class="flex items-center space-x-4 mt-4 mb-4">
-                        <img src="{{ $pict->user->image_path ? asset('storage/' . old('image_path', $pict->user->image_path)) : asset('storage/profiles/Shoyo_Hinata.jpg') }}"
+                        <img src="{{ $pict->user->image_path ? asset('storage/' . old('image_path', $pict->user->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
                             alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
 
                         <div class="flex-1">
