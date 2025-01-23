@@ -12,6 +12,7 @@ class LoginController extends Controller
 {
     public function index()
     {
+
         if (Auth::check()) {
             return redirect()->route('guest.dashboard');
         }
@@ -22,6 +23,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string|min:8',
@@ -66,6 +68,7 @@ class LoginController extends Controller
     }
     public function processRegister(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255', // Removed unique constraint
@@ -94,7 +97,7 @@ class LoginController extends Controller
         if ($user->save()) {
             return redirect()
                 ->route('guest.login')
-                ->with('success', 'You have registered successfully. Please log in.');
+                ->with('error', 'You have registered successfully. Please kindly wait until verified.');
         } else {
             return redirect()
                 ->route('guest.register')
