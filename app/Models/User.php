@@ -26,8 +26,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'username',
         'address',
-        'verified',
-        'is_admin'
+    ];
+    protected $casts = [
+        'verified' => 'boolean',
+        'is_admin' => 'boolean',
     ];
 
     public function Like()

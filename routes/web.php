@@ -28,6 +28,9 @@ Route::prefix('user')->group(function () {
     // Authenticated routes (dashboard, logout)
     Route::group(['middleware' => 'auth'], function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+        Route::get('admin/dashboard', [AdminController::class, 'showPendingUsers'])->name('admin.dashboard');
+        Route::get('admin/dashboard/approve', [AdminController::class, 'approveUser'])->name('admin.approve-user');
+        Route::get('admin/dashboard/reject', [AdminController::class, 'rejectUser'])->name('admin.approve-user');
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
         Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
         Route::post('Photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');

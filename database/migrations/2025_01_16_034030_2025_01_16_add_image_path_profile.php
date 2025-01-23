@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::table('users', function (Blueprint $table) {
-    $table->string('image_path')->nullable();
-    $table->string('image_cover_path')->nullable();
-});    }
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('image_path')->nullable();
+        });
+    }
 
     /**
      * Reverse the migrations.

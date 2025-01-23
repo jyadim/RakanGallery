@@ -12,7 +12,7 @@ class AdminController extends Controller
         // Get all users who have not been verified yet
         $users = User::where('verified', false)->get();
 
-        return view('admin.pending-users', compact('users'));
+        return view('AdminApproval', compact('users'));
     }
 
     public function approveUser($id)
@@ -22,7 +22,7 @@ class AdminController extends Controller
         $user->verified = true;
         $user->save();
 
-        return redirect()->route('admin.pending-users')->with('message', 'User approved successfully.');
+        return redirect()->route('AdminApproval')->with('message', 'User approved successfully.');
     }
 
     public function rejectUser($id)
@@ -31,6 +31,6 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.pending-users')->with('message', 'User rejected and deleted.');
+        return redirect()->route('AdminApproval')->with('message', 'User rejected and deleted.');
     }
 }

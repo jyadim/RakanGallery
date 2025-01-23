@@ -11,46 +11,58 @@ use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     public function index()
-{
-    if (Auth::check()) {
-        return redirect()->route('guest.dashboard');
+    {
+        if (Auth::check()) {
+            return redirect()->route('guest.dashboard');
+        }
+
+        return view('login'); // Ganti dengan nama view yang sesuai
     }
 
-    return view('login'); // Ganti dengan nama view yang sesuai
-}
 
+    public function authenticate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:8',
+        ]);
 
-public function authenticate(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'email' => 'required|string|email',
-        'password' => 'required|string|min:8',
-    ]);
+        if ($validator->fails()) {
+            return redirect()->route('guest.login')
+                ->withInput()
+                ->withErrors($validator);
+        }
 
-    if ($validator->fails()) {
-        // Return to the login page with validation errors
+        // Cek kredensial terlebih dahulu
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+
+            // Cek apakah pengguna belum terverifikasi
+            if (!$user->verified) {
+                Auth::logout();
+                return redirect()->route('guest.login')->with('error', 'Akun Anda belum diverifikasi.');
+            }
+
+            // Cek apakah pengguna adalah admin
+            if ($user->is_admin) {
+                return redirect()->route('admin.dashboard');
+            }
+
+            // Jika bukan admin, arahkan ke dashboard biasa
+            return redirect()->route('dashboard');
+        }
+
+        // Jika autentikasi gagal, kembalikan ke login dengan pesan error
         return redirect()->route('guest.login')
-                         ->withInput()
-                         ->withErrors($validator);
+            ->withInput()
+            ->with('error', 'Email atau password salah.');
     }
 
-    // Check if the email and password are correct
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-        // Authentication passed, redirect to the dashboard
-        return redirect()->route('dashboard');
-    } else {
-        // Authentication failed, return with an error message
-        return redirect()->route('guest.login')
-                         ->withInput()
-                         ->with('error', 'The provided credentials do not match our records.');
-    }
-}
 
 
-
-    public function register(){
+    public function register()
+    {
         return view('register');
-
     }
     public function processRegister(Request $request)
     {
@@ -78,7 +90,7 @@ public function authenticate(Request $request)
         $user->password = Hash::make($request->password);
         $user->email = $request->email;
         $user->address = $request->address;
-    
+
         if ($user->save()) {
             return redirect()
                 ->route('guest.login')
@@ -91,9 +103,9 @@ public function authenticate(Request $request)
         }
     }
 
-public function logout()
-{
-    Auth::logout();
-    return redirect()->route('guest.login');
-}
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('guest.login');
+    }
 }
