@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\Admin\AdminController;
-
+use App\Http\Controllers\NotificationController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +37,9 @@ Route::prefix('user')->group(function () {
         Route::delete('Photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
         Route::put('album/{id}', [AlbumController::class, 'update'])->name('album.update');
         Route::delete('album/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
-
+        Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
+        Route::post('notifications', [NotificationController::class, 'store']);
+        Route::patch('notifications/{id}/read', [NotificationController::class, 'markAsRead']);
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('album/{slug}/UploadPhoto', [AlbumController::class, 'upload'])->name('photo.store');
@@ -49,4 +51,3 @@ Route::prefix('user')->group(function () {
         Route::post('posts/like/{id}', [PhotoController::class, 'like'])->name('photo.like');
     });
 });
-
