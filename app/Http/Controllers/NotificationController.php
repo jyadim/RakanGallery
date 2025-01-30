@@ -19,7 +19,14 @@ class NotificationController extends Controller
 
         return view('notif', compact('notifications'));
     }
+    public function clearAll()
+    {
+        Notification::where('notifiable_type', User::class)
+            ->where('notifiable_id', Auth::id())
+            ->delete();
 
+        return redirect()->route('dashboard')->with('success', 'Semua notifikasi telah dihapus.');
+    }
     // Fungsi untuk menandai notifikasi sebagai telah dibaca
     public function markAsRead($id)
     {

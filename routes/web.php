@@ -40,6 +40,7 @@ Route::prefix('user')->group(function () {
         Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
         Route::post('notifications', [NotificationController::class, 'store']);
         Route::patch('notifications/{id}/read', [NotificationController::class, 'markAsRead']);
+        Route::delete('/notifications/clear', [NotificationController::class, 'clearAll'])->name('notifications.clear');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile');
         Route::post('album/{slug}/UploadPhoto', [AlbumController::class, 'upload'])->name('photo.store');

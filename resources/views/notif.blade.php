@@ -5,16 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Notifikasi</title>
+    <title>Notification</title>
 </head>
 <body class="bg-gray-100">
     <x-navbar></x-navbar>
 
     <div class="max-w-lg mx-auto mt-10">
-        <h2 class="text-xl font-bold mb-4">Notifikasi</h2>
+        <h2 class="text-xl font-bold mb-4 flex justify-between items-center">
+            Notification
+            <form action="{{ route('notifications.clear') }}" method="POST" onsubmit="return confirm('U sure want to clear all notifications?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:underline">Clear All</button>
+            </form>
+        </h2>
 
         <div class="space-y-4">
             @foreach($notifications as $notification)
+                @php $data = json_decode($notification->data); @endphp
                 <div class="bg-white p-4 shadow-md rounded-lg flex items-center space-x-4">
                     <div class="p-2 rounded-full {{ $notification->type == 'like' ? 'bg-blue-500' : 'bg-green-500' }} text-white">
                         @if($notification->type == 'like')
@@ -27,7 +35,9 @@
                             </svg>
                         @endif
                     </div>
-                    <p class="text-gray-700">{{ $notification->message }}</p>
+                    <p class="text-gray-700">
+                        {{ $data->message }}
+                    </p>
                 </div>
             @endforeach
         </div>

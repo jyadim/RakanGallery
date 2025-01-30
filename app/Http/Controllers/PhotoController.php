@@ -46,15 +46,18 @@ class PhotoController extends Controller
 
         // Kirim notifikasi ke pemilik foto
         $photoOwner = $comment->photo->user;
+        $currentUser = Auth::user();
 
         if ($photoOwner->id !== Auth::id()) {
             Notification::create([
                 'notifiable_type' => User::class,  // Model yang menerima notifikasi
-                'notifiable_id' => Auth()->id, // ID pengguna yang menerima notifikasi
-                'type' => 'like',
-                'data' => Auth()->name(),
+                'notifiable_id' => $photoOwner->id, // ID pengguna yang menerima notifikasi
+                'type' => 'comment',
+                'data' => json_encode([
+                    'message' => "{$currentUser->username} Commented on Your Photo",
+                    'username' => $currentUser->username,
+                ]),
             ]);
-
         }
 
         return redirect()->back()->with('success', 'Comment added successfully.');
@@ -79,16 +82,19 @@ class PhotoController extends Controller
                 'user_id' => $user->id,
                 'like_date' => Carbon::now()->format('Y-m-d'),
             ]);
+            $currentUser = Auth::user();
 
             // Kirim notifikasi ke pemilik foto
             $photoOwner = $photo->user;
             if ($photoOwner->id !== Auth::id()) {
                 Notification::create([
-                        'notifiable_type' => User::class,  // Model yang menerima notifikasi
-                        'notifiable_id' => $user->id, // ID pengguna yang menerima notifikasi
-                        'type' => 'like',
-                        'data' => json_encode(['message' => 'Seseorang menyukai postingan Anda']),
-
+                    'notifiable_type' => User::class,  // Model yang menerima notifikasi
+                    'notifiable_id' => $photoOwner->id, // ID pengguna yang menerima notifikasi
+                    'type' => 'like',
+                    'data' => json_encode([
+                        'message' => "{$currentUser->username} Liked Your Photo",
+                        'username' => $currentUser->username,
+                    ]),
                 ]);
             }
 
