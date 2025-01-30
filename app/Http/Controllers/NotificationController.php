@@ -15,16 +15,16 @@ class NotificationController extends Controller
         ->where('notifiable_id', Auth::id())
         ->orderBy('created_at', 'desc')
         ->get();
-    
 
-        return response()->json($notifications);
+
+        return view('notif', compact('notifications'));
     }
 
     // Fungsi untuk menandai notifikasi sebagai telah dibaca
     public function markAsRead($id)
     {
         $notification = Notification::where('id', $id)->where('user_id', Auth::id())->first();
-        
+
         if ($notification) {
             $notification->update(['is_read' => true]);
         }

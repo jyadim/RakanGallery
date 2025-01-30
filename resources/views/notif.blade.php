@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notifications</title>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    @vite('resources/css/app.css')
+    <title>Notifikasi</title>
 </head>
-<body class="bg-gray-100 p-5">
-    <div class="max-w-lg mx-auto bg-white shadow-lg p-6 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">Notifications</h2>
-    
+<body class="bg-gray-100">
+    <x-navbar></x-navbar>
 
-            <template x-if="notifications.length === 0">
-                <p class="text-center text-gray-500">No new notifications</p>
-            </template>
-    
-            <template x-for="notification in notifications" :key="notification.id">
-                <div class="border-b py-3 mb-3">
-                    <p x-text="notification.message" class="text-sm text-gray-700"></p>
-                    <span x-text="new Date(notification.created_at).toLocaleString()" class="text-xs text-gray-500 block mt-1"></span>
-                    <button 
-                        @click="notification.is_read = true"
-                        x-show="!notification.is_read"
-                        class="mt-2 bg-blue-500 text-white text-xs px-3 py-1 rounded hover:bg-blue-600">
-                        Mark as Read
-                    </button>
+    <div class="max-w-lg mx-auto mt-10">
+        <h2 class="text-xl font-bold mb-4">Notifikasi</h2>
+
+        <div class="space-y-4">
+            @foreach($notifications as $notification)
+                <div class="bg-white p-4 shadow-md rounded-lg flex items-center space-x-4">
+                    <div class="p-2 rounded-full {{ $notification->type == 'like' ? 'bg-blue-500' : 'bg-green-500' }} text-white">
+                        @if($notification->type == 'like')
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 9l-2-2m0 0L10 9m2-2v6m-6 6a6 6 0 100-12 6 6 0 000 12z"></path>
+                            </svg>
+                        @else
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.83l-4.71 2.35A1 1 0 012 20.53V12a9 9 0 0118 0z"></path>
+                            </svg>
+                        @endif
+                    </div>
+                    <p class="text-gray-700">{{ $notification->message }}</p>
                 </div>
-            </template>
+            @endforeach
         </div>
     </div>
 </body>

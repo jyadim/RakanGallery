@@ -17,7 +17,7 @@ class PhotoController extends Controller
     public function show($slug)
     {
         $photo = Photo::where('slug', $slug)->with('album')->firstOrFail();
-        
+
         // Ambil komentar terkait dengan hierarki parent-child
         $comments = Comment::with(['user', 'replies.user'])
             ->where('photo_id', $photo->id)
@@ -52,9 +52,9 @@ class PhotoController extends Controller
                 'notifiable_type' => User::class,  // Model yang menerima notifikasi
                 'notifiable_id' => Auth()->id, // ID pengguna yang menerima notifikasi
                 'type' => 'like',
-                'data' => json_encode(['message' => 'Seseorang menyukai postingan Anda']),
+                'data' => Auth()->name(),
             ]);
-            
+
         }
 
         return redirect()->back()->with('success', 'Comment added successfully.');
@@ -88,7 +88,7 @@ class PhotoController extends Controller
                         'notifiable_id' => $user->id, // ID pengguna yang menerima notifikasi
                         'type' => 'like',
                         'data' => json_encode(['message' => 'Seseorang menyukai postingan Anda']),
-                    
+
                 ]);
             }
 
@@ -114,7 +114,7 @@ class PhotoController extends Controller
 
         return redirect()->back()->with('success', 'Photo updated successfully.');
     }
-    
+
     public function destroy($id)
     {
         $photo = Photo::findOrFail($id);
