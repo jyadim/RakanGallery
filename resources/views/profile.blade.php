@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
 
-    <title>Document</title>
+    <title>KennGallery</title>
 </head>
 
 <body>

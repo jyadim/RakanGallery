@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>KennGallery</title>
 </head>
 <body>
     <form action="{{route('edit.profile.proccess')}}" method="post">
@@ -28,11 +28,11 @@
                             <!-- Profile Image -->
                             <div
                                 class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
-    
+
                                 <div class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4">
-    
+
                                     <input type="file" name="profile" id="upload_profile" hidden required>
-    
+
                                     <label for="upload_profile">
                                             <svg data-slot="icon" class="w-6 h-5 text-blue-700" fill="none"
                                                 stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
@@ -50,11 +50,11 @@
                             <div class="flex justify-end">
                                 <!--  -->
                                 <input type="file" name="profile" id="upload_cover" hidden required>
-    
+
                                 <div
                                     class="bg-white flex items-center gap-1 rounded-tl-md px-2 text-center font-semibold">
                                     <label for="upload_cover" class="inline-flex items-center gap-1 cursor-pointer">Cover
-                                        
+
                                     <svg data-slot="icon" class="w-6 h-5 text-blue-700" fill="none" stroke-width="1.5"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                         aria-hidden="true">
@@ -67,7 +67,7 @@
                                     </svg>
                                     </label>
                                 </div>
-    
+
                             </div>
                         </div>
                         <h2 class="text-center mt-1 font-semibold dark:text-gray-300">Upload Profile and Cover Image
@@ -86,7 +86,7 @@
                                         placeholder="Last Name">
                             </div>
                         </div>
-    
+
                         <div class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                             <div class="w-full">
                                 <h3 class="dark:text-gray-300 mb-2">Sex</h3>
