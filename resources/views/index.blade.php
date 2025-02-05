@@ -17,7 +17,8 @@
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-20 py-14">
         @foreach ($photos as $pict)
-            <div class="bg-white rounded-lg shadow-lg p-4 inline-block h">
+            <div
+                class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <!-- Gambar -->
                 <a href="{{ route('detail.photo', ['slug' => $pict->slug]) }}">
                     <div>
@@ -74,7 +75,12 @@
                                 {{ $pict->user->username }}
                             </div>
                             <div class="text-xs text-gray-500">
-                                <i class="fa fa-clock"></i> {{ $pict->created_at->diffForHumans() }}
+                                <i class="fa fa-clock"></i>
+                                @if ($pict->created_at->diffInDays(now()) > 2)
+                                    {{ $pict->created_at->format('d M Y') }}
+                                @else
+                                    {{ $pict->created_at->diffForHumans() }}
+                                @endif
                             </div>
                         </div>
                     </div>

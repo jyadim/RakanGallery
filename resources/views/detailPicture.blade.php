@@ -41,12 +41,12 @@
                     <div class="mb-4">
                         <label for="photo_title" class="block text-gray-700">Photo Title</label>
                         <input type="text" name="photo_title" id="photo_title" placeholder="Enter Photo Title"
-                            class="w-full p-4 border border-indigo-600 rounded-lg" required>
+                            class="w-full p-4 border border-indigo-600 rounded-lg">
                     </div>
                     <div class="mb-4">
                         <label for="desc" class="block text-gray-700">Album Desc</label>
                         <input type="text" name="desc" id="desc" placeholder="Enter Album Desc"
-                            class="w-full p-4 border border-indigo-600 rounded-lg" required>
+                            class="w-full p-4 border border-indigo-600 rounded-lg">
                     </div>
                     <div class="mb-4">
                         <label for="photo" class="block text-gray-700">Photo</label>

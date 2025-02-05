@@ -36,9 +36,9 @@ class AlbumController extends Controller
     {
         $album = Album::where('slug', $slug)->firstOrFail();
         $validated = $request->validate([
-            'photo_title' => 'required|string|max:255',
-            'desc' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png,gif',
+            'photo_title' => 'nullable|string|max:255',
+            'desc' => 'nullable|string|max:255',
+            'photo' => 'required|image|mimes:jpg,jpeg,png,gif',
         ]);
 
         $photo = new Photo();
