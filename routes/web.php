@@ -32,9 +32,9 @@ Route::prefix('user')->group(function () {
         Route::post('admin/dashboard/approve/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
         Route::post('admin/dashboard/reject/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
-        Route::get('Photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
-        Route::post('Photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
-        Route::delete('Photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
+        Route::get('photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
+        Route::post('photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
+        Route::delete('photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');
         Route::put('album/{id}', [AlbumController::class, 'update'])->name('album.update');
         Route::delete('album/{id}', [AlbumController::class, 'destroy'])->name('album.destroy');
         Route::get('notifications', [NotificationController::class, 'index'])->name('notifications');
