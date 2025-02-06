@@ -13,22 +13,37 @@
 <body>
     <x-navbar></x-navbar>
 
+    <!-- Dropdown Filter -->
+
+    <div class="flex justify-start mb-4 mt-6 px-20 space-x-2">
+        
+        <a href="?filter=most_like"
+           class="px-4 py-2 border border-gray-300 rounded-lg
+                  {{ request('filter') == 'most_like' ? 'bg-blue-500 text-white' : 'bg-white text-black' }}">
+            Most Like
+        </a>
+        <a href="?filter=most_comments"
+           class="px-4 py-2 border border-gray-300 rounded-lg
+                  {{ request('filter') == 'most_comments' ? 'bg-blue-500 text-white' : 'bg-white text-black' }}">
+            Most Comments
+        </a>
+    </div>
 
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-20 py-14">
         @foreach ($photos as $pict)
-            <div
-                class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
-                <!-- Gambar -->
+            <div class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105 hover:shadow-2xl">
                 <a href="{{ route('detail.photo', ['slug' => $pict->slug]) }}">
+                    <!-- Gambar -->
                     <div>
                         <img class="h-auto max-w-full rounded-lg cursor-pointer"
-                            src="{{ asset('storage/' . $pict->image_path) }}" alt="Gambar">
+                            src="{{ asset('storage/' . $pict->image_path) }}"
+                            alt="Gambar">
                     </div>
+
                     <!-- Informasi -->
                     <div class="mt-2 flex justify-between items-center">
                         <h2 class="text-lg font-semibold">{{ $pict->photo_name }}</h2>
-
                         <div class="flex items-center space-x-4">
                             <!-- Like Button -->
                             <form action="{{ route('photo.like', $pict->id) }}" method="POST">
@@ -41,7 +56,7 @@
                                         2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09
                                         3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4
                                         6.86-8.55 11.54L12 21.35z"
-                                            @if (auth()->user() && $pict->like->where('user_id', auth()->id())->count()) fill="currentColor" @endif />
+                                        @if (auth()->user() && $pict->like->where('user_id', auth()->id())->count()) fill="currentColor" @endif />
                                     </svg>
                                     <span class="ml-1 text-sm font-medium">{{ $pict->like->count() }}</span>
                                 </button>
@@ -54,7 +69,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M8 10h.01M12 10h.01M16 10h.01M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z" />
                                 </svg>
-
                                 <span class="text-sm font-medium">
                                     {{ $comments->where('photo_id', $pict->id)->count() }}
                                 </span>
@@ -67,7 +81,7 @@
 
                     <!-- User Information -->
                     <div class="flex items-center space-x-4 mt-4 mb-4">
-                        <img src="{{ $pict->user->image_path ? asset('storage/' . old('image_path', $pict->user->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
+                        <img src="{{ $pict->user->image_path ? asset('storage/' . old('image_path', $pict->user->image_path)) : asset('storage/profiles/default.jpg') }}"
                             alt="User Avatar" class="w-10 h-10 rounded-full object-cover">
 
                         <div class="flex-1">
@@ -87,10 +101,15 @@
                 </a>
             </div>
         @endforeach
+    </div>
 
-
-        <!-- Popup -->
+    <!-- JavaScript untuk Filter -->
+    <script>
+        document.getElementById('filterDropdown').addEventListener('change', function () {
+            let filter = this.value;
+            window.location.href = `?filter=${filter}`;
+        });
+    </script>
 
 </body>
-
 </html>

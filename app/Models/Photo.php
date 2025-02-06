@@ -15,7 +15,7 @@ class Photo extends Model
     {
         return $this->hasMany(Like::class, 'photo_id')->latest();
     }
-    public function Comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class, 'photo_id')->latest();
     }
