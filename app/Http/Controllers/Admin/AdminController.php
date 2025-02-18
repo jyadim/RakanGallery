@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -21,8 +22,8 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->verified = true;
         $user->save();
-
-        return redirect()->route('admin.dashboard')->with('message', 'User approved successfully.');
+        Session::flash('success', 'User Approved Successfully.');
+        return redirect()->route('admin.dashboard');
     }
 
     public function rejectUser($id)
@@ -30,6 +31,7 @@ class AdminController extends Controller
         // Find the user by ID and delete them if rejected
         $user = User::findOrFail($id);
         $user->delete();
+        Session::flash('error', 'User Has Being Rejected and Deleted Successfully.');
 
         return redirect()->route('admin.dashboard')->with('message', 'User rejected and deleted.');
     }

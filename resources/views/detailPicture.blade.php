@@ -15,6 +15,16 @@
 
     <div class="w-full mb-6 lg:mb-0 flex flex-col items-start gap-4 px-14 lg:px-20 lg:py-16"> <!-- Added padding -->
         <div>
+            @if (Session::has('success'))
+            <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
+                {{ Session::get('success') }}
+            </div>
+        @endif
+        @if (Session::has('error'))
+            <div class="bg-red-500 text-white p-3 rounded mt-4 mb-2">
+                {{ Session::get('error') }}
+            </div>
+        @endif
             <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">
                 {{ $album->album_name }}'s Album
             </h1>

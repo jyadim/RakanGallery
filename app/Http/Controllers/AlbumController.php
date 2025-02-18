@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
@@ -50,10 +51,6 @@ class AlbumController extends Controller
         $photo->album_id = $album->id;
         $photo->slug = Str::slug($validated['photo_title']);
 
-
-
-
-
         // Handle Profile Image Upload
         if ($request->hasFile('photo')) {
             $image_path = $request->file('photo')->store('photos', 'public');
@@ -64,8 +61,9 @@ class AlbumController extends Controller
 
 
         $photo->save();
+        Session::flash('success', 'Photo Uploaded Successfully.');
 
-        return redirect()->route('detail.album', ['slug' => $slug])->with('success', 'Profile updated successfully.');
+        return redirect()->route('detail.album', ['slug' => $slug]);
     }
     public function edit($id)
 {
@@ -84,8 +82,9 @@ public function update(Request $request, $id)
     $album->album_name = $request->album_name;
     $album->desc = $request->desc;
     $album->save();
+    Session::flash('success', 'Album Updated Successfully.');
 
-    return redirect()->route('profile')->with('success', 'Album updated successfully');
+    return redirect()->route('profile');
 }
 
 public function destroy($id)

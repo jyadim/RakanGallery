@@ -181,6 +181,16 @@
             <div>
                 <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">Your Albums</h1>
                 <div class="h-1 w-60 bg-blue-700 rounded"></div>
+                @if (Session::has('success'))
+                <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if (Session::has('error'))
+                <div class="bg-red-500 text-white p-3 rounded mt-4 mb-2">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
             </div>
             <!-- Button to open the create album form -->
             <button id="openFormButton"
