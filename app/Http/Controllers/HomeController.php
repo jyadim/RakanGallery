@@ -31,6 +31,10 @@ class HomeController extends Controller
                 ->withCount('comments')
                 ->orderByDesc('comments_count')
                 ->get();
+        } elseif ($filter == 'latest') {
+            $photos = Photo::with(['User', 'Like', 'comments'])
+                ->orderByDesc('created_at')
+                ->get();
         } else {
             // Ambil foto dalam urutan acak
             $photos = Photo::with(['User', 'Like', 'comments'])

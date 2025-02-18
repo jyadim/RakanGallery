@@ -14,20 +14,29 @@
     <x-navbar></x-navbar>
 
     <!-- Dropdown Filter -->
-
-    <div class="flex justify-start mb-4 mt-6 px-20 space-x-2">
-        
+    <div class="flex flex-wrap justify-start mb-6 mt-6 px-4 md:px-20 space-x-3">
+        <!-- Filter: Latest Photo -->
+        <a href="?filter=latest"
+           class="py-2 px-4 shadow-md no-underline rounded-full font-sans font-semibold text-sm border border-blue transition-colors duration-300
+                  {{ request('filter') == 'latest' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-blue-700 hover:text-white' }}">
+            Latest Photo
+        </a>
+    
+        <!-- Filter: Most Like -->
         <a href="?filter=most_like"
-           class="px-4 py-2 border border-gray-300 rounded-lg
-                  {{ request('filter') == 'most_like' ? 'bg-blue-500 text-white' : 'bg-white text-black' }}">
+           class="py-2 px-4 shadow-md no-underline rounded-full font-sans font-semibold text-sm border border-blue transition-colors duration-300
+                  {{ request('filter') == 'most_like' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-blue-700 hover:text-white' }}">
             Most Like
         </a>
+    
+        <!-- Filter: Most Comments -->
         <a href="?filter=most_comments"
-           class="px-4 py-2 border border-gray-300 rounded-lg
-                  {{ request('filter') == 'most_comments' ? 'bg-blue-500 text-white' : 'bg-white text-black' }}">
+           class="py-2 px-4 shadow-md no-underline rounded-full font-sans font-semibold text-sm border border-blue transition-colors duration-300
+                  {{ request('filter') == 'most_comments' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-blue-700 hover:text-white' }}">
             Most Comments
         </a>
     </div>
+    
 
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-20 py-14">

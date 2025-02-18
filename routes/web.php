@@ -11,26 +11,30 @@ use App\Http\Controllers\NotificationController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
-// Default route to redirect to the login page
 Route::get('/', function () {
-    return redirect()->route('guest.login'); // Redirect to login page
+    return redirect()->route('guest.login');
 });
 
+// 🛑 Admin Routes (Hanya Admin)
+Route::prefix('admin')->middleware('auth', 'admin')->group(function(){
+    Route::get('dashboard', [AdminController::class, 'showPendingUsers'])->name('admin.dashboard');
+    Route::post('dashboard/approve/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
+    Route::post('dashboard/reject/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
+});
+
+// 🙋‍♂️ User Routes
 Route::prefix('user')->group(function () {
-    // Guest-only routes (login, register)
-    Route::group(['middleware' => 'guest'], function () {
+    // 🚪 Guest Routes
+    Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'index'])->name('guest.login');
         Route::post('authenticate', [LoginController::class, 'authenticate'])->name('guest.authenticate');
         Route::get('register', [LoginController::class, 'register'])->name('guest.register');
         Route::post('process-register', [LoginController::class, 'processRegister'])->name('guest.processRegister');
     });
 
-    // Authenticated routes (dashboard, logout)
-    Route::group(['middleware' => 'auth'], function () {
+    // 🔒 Authenticated Users (Non-Admin)
+    Route::middleware('auth')->group(function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-        Route::get('admin/dashboard', [AdminController::class, 'showPendingUsers'])->name('admin.dashboard');
-        Route::post('admin/dashboard/approve/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
-        Route::post('admin/dashboard/reject/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
         Route::get('photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
         Route::post('photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');

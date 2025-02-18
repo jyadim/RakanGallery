@@ -35,7 +35,7 @@ class ProfileController extends Controller
                 ->get();
         }
         // Pass the profile and albums to the view
-        return view('profile', compact('profile', 'album', 'photos'));
+        return view('profile', compact('profile', 'album'));
     }
     public function edit()
     {
