@@ -12,7 +12,7 @@ use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return redirect()->route('guest.login');
+    return redirect()->route('dashboard');
 });
 
 // 🛑 Admin Routes (Hanya Admin)
