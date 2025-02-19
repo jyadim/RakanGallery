@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Feb 2025 pada 08.52
+-- Waktu pembuatan: 19 Feb 2025 pada 09.40
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -98,7 +98,9 @@ INSERT INTO `comments` (`id`, `comments`, `upload_date`, `created_at`, `updated_
 (8, '😜😜', '2025-01-30', '2025-01-29 20:38:38', '2025-01-29 20:38:38', 5, 3, NULL),
 (10, 'kuriboh jawa', '2025-01-30', '2025-01-29 21:58:02', '2025-01-29 21:58:02', 3, 3, 6),
 (11, 'aku mafia shalawat', '2025-02-05', '2025-02-04 18:14:14', '2025-02-04 18:14:14', 13, 2, NULL),
-(12, 'mkan-mkan', '2025-02-05', '2025-02-04 23:28:13', '2025-02-04 23:28:13', 10, 2, NULL);
+(12, 'mkan-mkan', '2025-02-05', '2025-02-04 23:28:13', '2025-02-04 23:28:13', 10, 2, NULL),
+(13, 'pacarku ini men', '2025-02-19', '2025-02-18 21:19:21', '2025-02-18 21:19:21', 20, 4, NULL),
+(14, 'test', '2025-02-19', '2025-02-18 21:41:23', '2025-02-18 21:41:23', 3, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -176,7 +178,6 @@ INSERT INTO `like` (`id`, `like_date`, `created_at`, `updated_at`, `photo_id`, `
 (8, '2025-01-30', '2025-01-29 20:37:22', '2025-01-29 20:37:22', 5, 3),
 (9, '2025-01-30', '2025-01-29 21:00:00', '2025-01-29 21:00:00', 3, 2),
 (10, '2025-01-30', '2025-01-29 21:58:06', '2025-01-29 21:58:06', 6, 3),
-(11, '2025-02-05', '2025-02-04 17:40:27', '2025-02-04 17:40:27', 4, 2),
 (12, '2025-02-05', '2025-02-04 17:40:29', '2025-02-04 17:40:29', 5, 2),
 (13, '2025-02-05', '2025-02-04 17:40:31', '2025-02-04 17:40:31', 6, 2),
 (14, '2025-02-05', '2025-02-04 18:01:37', '2025-02-04 18:01:37', 7, 4),
@@ -189,7 +190,15 @@ INSERT INTO `like` (`id`, `like_date`, `created_at`, `updated_at`, `photo_id`, `
 (22, '2025-02-05', '2025-02-04 23:08:42', '2025-02-04 23:08:42', 8, 4),
 (24, '2025-02-05', '2025-02-04 23:08:49', '2025-02-04 23:08:49', 12, 4),
 (25, '2025-02-05', '2025-02-04 23:08:53', '2025-02-04 23:08:53', 15, 4),
-(26, '2025-02-05', '2025-02-04 23:29:16', '2025-02-04 23:29:16', 10, 4);
+(26, '2025-02-05', '2025-02-04 23:29:16', '2025-02-04 23:29:16', 10, 4),
+(28, '2025-02-19', '2025-02-18 20:51:17', '2025-02-18 20:51:17', 17, 2),
+(29, '2025-02-19', '2025-02-18 21:19:06', '2025-02-18 21:19:06', 21, 4),
+(30, '2025-02-19', '2025-02-18 21:19:08', '2025-02-18 21:19:08', 20, 4),
+(31, '2025-02-19', '2025-02-18 21:47:48', '2025-02-18 21:47:48', 16, 2),
+(32, '2025-02-19', '2025-02-18 23:38:03', '2025-02-18 23:38:03', 24, 2),
+(33, '2025-02-19', '2025-02-19 00:03:55', '2025-02-19 00:03:55', 13, 2),
+(36, '2025-02-19', '2025-02-19 00:05:48', '2025-02-19 00:05:48', 14, 2),
+(37, '2025-02-19', '2025-02-19 00:06:21', '2025-02-19 00:06:21', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -251,7 +260,9 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `notifiable_type`, `notifiable_id`, `type`, `data`, `read_at`, `created_at`, `updated_at`) VALUES
-(24, 'App\\Models\\User', 4, 'comment', '{\"message\":\"KennGantengBanget Commented on Your Photo\",\"username\":\"KennGantengBanget\"}', NULL, '2025-02-04 23:28:13', '2025-02-04 23:28:13');
+(28, 'App\\Models\\User', 4, 'like', '{\"message\":\"KennGantengBanget Liked Your Photo\",\"username\":\"KennGantengBanget\"}', NULL, '2025-02-19 00:03:55', '2025-02-19 00:03:55'),
+(29, 'App\\Models\\User', 4, 'like', '{\"message\":\"KennGantengBanget Liked Your Photo\",\"username\":\"KennGantengBanget\"}', NULL, '2025-02-19 00:05:34', '2025-02-19 00:05:34'),
+(30, 'App\\Models\\User', 4, 'like', '{\"message\":\"KennGantengBanget Liked Your Photo\",\"username\":\"KennGantengBanget\"}', NULL, '2025-02-19 00:05:48', '2025-02-19 00:05:48');
 
 -- --------------------------------------------------------
 
@@ -301,7 +312,10 @@ INSERT INTO `photos` (`id`, `photo_name`, `photo_desc`, `upload_date`, `image_pa
 (14, 'berpikir panjang', 'berpikir', '2025-02-05', 'photos/VZDGTXToz11mOoCm7oFZwkfZvIP0oMRv75brbpnl.jpg', '2025-02-04 18:51:34', '2025-02-04 18:51:34', 4, 4, 'berpikir-panjang'),
 (15, 'zero two', 'pacar aku', '2025-02-05', 'photos/AQfHo0M6PWLCtMIWkmg9KHsGVSwCntqzpJTgtsL3.jpg', '2025-02-04 19:06:46', '2025-02-04 19:06:46', 5, 2, 'zero-two'),
 (16, 'Singkong', NULL, '2025-02-05', 'photos/mRdT5vUWOKaIaxCJisHt3TWqW0D7El76Bfrbuodz.jpg', '2025-02-04 23:39:46', '2025-02-04 23:39:46', 3, 2, 'singkong'),
-(17, 'gomen amanai😂', NULL, '2025-02-05', 'photos/fy00hG6lyaqM8NsFNrB7NI7VawRiWsAkU1w1hIiG.jpg', '2025-02-04 23:40:00', '2025-02-04 23:40:38', 3, 2, 'satrio');
+(17, 'gomen amanai😂', NULL, '2025-02-05', 'photos/fy00hG6lyaqM8NsFNrB7NI7VawRiWsAkU1w1hIiG.jpg', '2025-02-04 23:40:00', '2025-02-04 23:40:38', 3, 2, 'satrio'),
+(20, 'Cantik Bwangett', '💕🌹', '2025-02-19', 'photos/MzzDlLyHqiGASVfMIGIHNbi2tOg9k4dhEoMpeEZp.jpg', '2025-02-18 19:53:14', '2025-02-18 19:53:14', 5, 2, 'cantik-bwangett'),
+(21, 'allahuakbarrr', NULL, '2025-02-19', 'photos/klLYW8wwSacnadfxZJ0M7EZ0tsJxbAES8cSgA8Xj.jpg', '2025-02-18 19:55:51', '2025-02-18 19:55:51', 5, 2, 'allahuakbarrr'),
+(24, 'pro kontra', NULL, '2025-02-19', 'photos/u8SLyn7kHRxfdBequT1w61UgXhQFi52hl2OjCrWl.jpg', '2025-02-18 21:44:16', '2025-02-18 21:53:58', 3, 2, 'dvadv');
 
 -- --------------------------------------------------------
 
@@ -323,7 +337,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('aH6JVb0iNNCIlWmcq8pPuNIKPD9BGCPyhjOiWNbq', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOFBRazBMelpIS2ZPT0lDYjJia2lBSUxVcHRIRzZkUUhUWDRkTFdXVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL25vdGlmaWNhdGlvbnMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTo0O30=', 1738741932);
+('tFbxPeK6TuVZyF4QPZWigWwT1DNI7TenxwnNOg2u', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiakNzM2dMNlhKaGhxT0h5aDY2V0lkNGJOdDZocldsY1FYWjMwTUpYaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1739952093),
+('XVgw032AlQimWGAxdXBBZN6r9jU8LBzDV9iab0ZV', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidW9tSDZ1OWVZZ2NLZ3BlNHFJYVltTWt5QUE4ZDJyelJyc2ZRSEJpUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL2FsYnVtL21lbWUtbHVjdS1ibmd0LWx1cmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YToxOntzOjg6ImludGVuZGVkIjtzOjM2OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvdXNlci9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1739954226);
 
 -- --------------------------------------------------------
 
@@ -353,10 +368,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `address`, `remember_token`, `created_at`, `updated_at`, `image_path`, `status`, `verified`, `is_admin`, `email_verified_at`) VALUES
-(1, 'Admin', 'admin@KennGallery.com', 'AdminMantapWell', '$2y$12$RdKkdwvdB3T3/6SzlUooHeEoeWZwGBJtgs8GkDAOdGlvWwWOu.L1u', 'aa', 'vNe2zpXZGGXj23APWrYqLVjKNt6Nm1VsdiN5cEvRUo0rZKrPedITGYVM4mZj', '2025-01-29 18:35:23', '2025-01-29 18:35:23', NULL, NULL, 1, 1, '2025-01-29 18:35:23'),
-(2, 'Kenn', 'aselole@gmail.com', 'KennGantengBanget', '$2y$12$1s5d7Lx2.a3Fnq7gUPiO/.E7YsoAxwNox2ZgQyYAbJhkqTD0fTKyC', 'jljl', NULL, '2025-01-29 18:35:42', '2025-02-04 17:54:57', 'profiles/RIIBJsJQndpwAB9rQgW1KHxM8KSa2768eMx0kpN6.jpg', 'Certified as a Professional Coat Hanger', 1, 0, NULL),
+(1, 'Admin', 'admin@KennGallery.com', 'AdminMantapWell', '$2y$12$RdKkdwvdB3T3/6SzlUooHeEoeWZwGBJtgs8GkDAOdGlvWwWOu.L1u', 'aa', 'GK5wNLqTLD08SLmmzJe4G0JYozdW69dycHdrAoKPZV8Wsv62m59UQ6tZ7bhs', '2025-01-29 18:35:23', '2025-01-29 18:35:23', NULL, NULL, 1, 1, '2025-01-29 18:35:23'),
+(2, 'Kenn', 'aselole@gmail.com', 'KennGantengBanget', '$2y$12$1s5d7Lx2.a3Fnq7gUPiO/.E7YsoAxwNox2ZgQyYAbJhkqTD0fTKyC', 'jljlanan', NULL, '2025-01-29 18:35:42', '2025-02-18 21:58:29', 'profiles/RIIBJsJQndpwAB9rQgW1KHxM8KSa2768eMx0kpN6.jpg', 'Certified as a Professional Coat Hanger', 1, 0, NULL),
 (3, 'fdhdhdf', 'tes@gmail.com', 'sdgsdgsdg', '$2y$12$fv69qlgWXaeLEcj5BCMpXOtdsJjA4WKTxmZWmqgpndbbsCAv5QxTe', 'adsvgsdg', NULL, '2025-01-29 18:36:00', '2025-01-29 18:36:10', NULL, NULL, 1, 0, NULL),
-(4, 'Amba', 'asikjos@gmail.com', 'MasAmba', '$2y$12$cKWvzMKRDN4lUdHCJDhPWOAb4yDJpxQhdtYrsUT4enhOFL9aVnWX.', 'jl.in aja dulu', NULL, '2025-01-29 20:21:03', '2025-02-04 18:37:19', 'profiles/1vzReko91dquY30cJRh46Ag1em1jE8AcLi48tLul.jpg', 'ambatunatt', 1, 0, NULL);
+(4, 'Amba', 'asikjos@gmail.com', 'MasAmba', '$2y$12$cKWvzMKRDN4lUdHCJDhPWOAb4yDJpxQhdtYrsUT4enhOFL9aVnWX.', 'jl.in aja dulu', NULL, '2025-01-29 20:21:03', '2025-02-18 19:50:00', 'profiles/1vzReko91dquY30cJRh46Ag1em1jE8AcLi48tLul.jpg', 'No Woman No Cry', 1, 0, NULL),
+(6, 'Crossflow Turbinee', 'test@gmail.com', 'sdsdf', '$2y$12$j3WVuYk8Em4gmhuXteM6VeaPT6R14qsxrAJfJf2jk4K5kl27/Vule', 'sdfdsf', NULL, '2025-02-18 21:46:50', '2025-02-18 21:46:50', NULL, NULL, 0, 0, NULL);
 
 --
 -- Indexes for dumped tables
@@ -467,13 +483,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -491,7 +507,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `like`
 --
 ALTER TABLE `like`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -503,19 +519,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
