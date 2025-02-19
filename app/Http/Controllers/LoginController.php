@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -43,7 +43,7 @@ class LoginController extends Controller
             // Cek apakah pengguna belum terverifikasi
             if (!$user->verified) {
                 Auth::logout();
-                return redirect()->route('guest.login')->with('error', 'Akun Anda belum diverifikasi.');
+                return redirect()->route('guest.login')->with('error', 'Your Account Has not Being Verified.');
             }
 
             // Cek apakah pengguna adalah admin
@@ -58,7 +58,7 @@ class LoginController extends Controller
         // Jika autentikasi gagal, kembalikan ke login dengan pesan error
         return redirect()->route('guest.login')
             ->withInput()
-            ->with('error', 'Email atau password salah.');
+            ->with('error', 'Email or Password is Incorrect.');
     }
 
 
@@ -110,8 +110,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        Session::flash('success', 'Your Account Has Been Logout Successfully.');
 
-        return redirect()->route('guest.login');
+        return redirect()->route('guest.login')->with('error', 'Your Account Has Been Logout Successfully.');
     }
 }

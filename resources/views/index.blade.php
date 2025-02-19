@@ -19,7 +19,7 @@
         <a href="?filter=latest"
            class="py-2 px-4 shadow-md no-underline rounded-full font-sans font-semibold text-sm border border-blue transition-colors duration-300
                   {{ request('filter') == 'latest' ? 'bg-blue-700 text-white' : 'bg-white text-gray-700 hover:bg-blue-700 hover:text-white' }}">
-            Latest Photo
+            Newest Photo
         </a>
 
         <!-- Filter: Most Like -->

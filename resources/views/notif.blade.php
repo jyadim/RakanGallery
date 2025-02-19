@@ -38,6 +38,17 @@
                     <p class="text-gray-700">
                         {{ $data->message }}
                     </p>
+                    <div class="flex-1">
+
+                        <div class="text-xs text-gray-500">
+                            <i class="fa fa-clock"></i>
+                            @if ($notification->created_at->diffInDays(now()) > 2)
+                                {{ $notification->created_at->format('d M Y') }}
+                            @else
+                                {{ $notification->created_at->diffForHumans() }}
+                            @endif
+                        </div>
+                    </div>
                 </div>
             @empty
                 <div class="text-center text-gray-500 py-6">
@@ -45,7 +56,7 @@
                 </div>
             @endforelse
         </div>
-        
+
     </div>
 </body>
 </html>

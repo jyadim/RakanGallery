@@ -130,6 +130,6 @@ class PhotoController extends Controller
 
         $photo->delete();
 
-        return redirect()->back()->with('success', 'Photo deleted successfully.');
+        return redirect()->back()->with('error', 'Photo Deleted Successfully.');
     }
 }

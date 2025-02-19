@@ -26,10 +26,9 @@ class AlbumController extends Controller
         }
 
         // Check if photos are empty and pass the result to the view
-        $photos = $album->photos;
 
         // Pass the photos and album to the view
-        return view('detailPicture', compact('album', 'photos'));
+        return view('detailPicture', compact('album'));
     }
 
 
@@ -102,7 +101,7 @@ public function destroy($id)
     // Delete the album
     $album->delete();
 
-    return redirect()->route('profile')->with('success', 'Album deleted successfully');
+    return redirect()->route('profile')->with('error', 'Album Deleted Successfully.');
 }
 
 
