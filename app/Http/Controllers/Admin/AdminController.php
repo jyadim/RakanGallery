@@ -30,9 +30,8 @@ class AdminController extends Controller
     {
         // Find the user by ID and delete them if rejected
         $user = User::findOrFail($id);
-        $user->delete();
-        Session::flash('error', 'User Has Being Rejected and Deleted Successfully.');
+        Session::flash('error', 'User Has Been Rejected Successfully.');
 
-        return redirect()->route('admin.dashboard')->with('message', 'User rejected and deleted.');
+        return redirect()->route('admin.dashboard')->with('message', 'User Has Been Rejected Successfully.');
     }
 }
