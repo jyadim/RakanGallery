@@ -38,8 +38,8 @@ class HomeController extends Controller
         } else {
             // Ambil foto dalam urutan acak
             $photos = Photo::with(['User', 'Like', 'comments'])
-                ->inRandomOrder()
-                ->get();
+                ->get()
+                ;
         }
 
         return view('index', compact('photos', 'users', 'comments'));
