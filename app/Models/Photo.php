@@ -11,7 +11,7 @@ class Photo extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function Like()
+    public function likes()
     {
         return $this->hasMany(Like::class, 'photo_id')->latest();
     }

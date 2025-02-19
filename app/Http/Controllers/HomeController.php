@@ -16,28 +16,28 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        $photos = Photo::with(['Album', 'Like'])->get(); // Eager load Album relationship
         $users = User::with('Photo')->get(); // Eager load Photo relationship
+        $photos = Photo::with(['Album', 'likes'])->get(); // Eager load Album relationship
         $comments = Comment::with(['Photo', 'user'])->get();
         $filter = $request->query('filter');
 
         if ($filter == 'most_like') {
-            $photos = Photo::with(['User', 'Like', 'comments'])
-                ->withCount('like')
-                ->orderByDesc('like_count')
+            $photos = Photo::with(['User', 'likes', 'comments'])
+                ->withCount('likes')
+                ->orderByDesc('likes_count')
                 ->get();
         } elseif ($filter == 'most_comments') {
-            $photos = Photo::with(['User', 'Like', 'comments'])
+            $photos = Photo::with(['User', 'likes', 'comments'])
                 ->withCount('comments')
                 ->orderByDesc('comments_count')
                 ->get();
         } elseif ($filter == 'latest') {
-            $photos = Photo::with(['User', 'Like', 'comments'])
+            $photos = Photo::with(['User', 'likes', 'comments'])
                 ->orderByDesc('created_at')
                 ->get();
         } else {
             // Ambil foto dalam urutan acak
-            $photos = Photo::with(['User', 'Like', 'comments'])
+            $photos = Photo::with(['User', 'likes', 'comments'])
                 ->get()
                 ;
         }

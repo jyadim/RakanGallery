@@ -29,6 +29,13 @@
                             Profile
                         </x-navlink>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.downloadReport') }}"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Download Laporan PDF
+                        </a>
+
+                    </li>
                 @else
                     <!-- User Menu -->
                     <li>

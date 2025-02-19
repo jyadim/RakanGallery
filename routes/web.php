@@ -21,6 +21,8 @@ Route::prefix('admin')->middleware('auth', 'admin')->group(function(){
     Route::post('dashboard/approve/{id}', [AdminController::class, 'approveUser'])->name('admin.approve-user');
     Route::post('dashboard/reject/{id}', [AdminController::class, 'rejectUser'])->name('admin.reject-user');
     Route::get('profile', [ProfileController::class, 'index'])->name('admin.profile');
+    Route::get('download-report', [AdminController::class, 'downloadReport'])->name('admin.downloadReport');
+
 
 });
 

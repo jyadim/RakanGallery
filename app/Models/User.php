@@ -27,7 +27,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'address',
         'verified',
-        'is_admin'
+        'is_admin',
+        'bio',
+        'status',
+        'message',
+        'rejected'
     ];
 
     public function Like()

@@ -25,7 +25,7 @@
 
                     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-1">{{ $item->name }}</h1>
                     <p class="text-indigo-600 dark:text-indigo-400 font-semibold mb-4">{{ $item->username }}</p>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $item->status }}</p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $item->bio }}</p>
         @endforeach
         <div class="px-16 flex items-center gap-x-2">
             <!-- Form untuk Logout -->
@@ -130,7 +130,7 @@
                                     <div class="w-full  mb-4 lg:mt-6">
                                         <label for="status" class=" dark:text-gray-300">Bio</label>
                                         <input type="text" name="status" id="status"
-                                            value="{{ old('status', auth()->user()->status) }}"
+                                            value="{{ old('status', auth()->user()->bio) }}"
                                             class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
                                             placeholder="Bio">
                                     </div>

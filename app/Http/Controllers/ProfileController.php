@@ -56,7 +56,7 @@ class ProfileController extends Controller
         $user->name = $validated['name'];
         $user->username = $validated['username'];
         $user->address = $validated['address'];
-        $user->status = $validated['status'];
+        $user->bio = $validated['status'];
 
         // Handle Profile Image Upload
         if ($request->hasFile('profile')) {

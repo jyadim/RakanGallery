@@ -41,10 +41,16 @@ class LoginController extends Controller
             $user = Auth::user();
 
             // Cek apakah pengguna belum terverifikasi
+            if ($user->status === 'rejected') {
+                Auth::logout();
+                return redirect()->route('guest.login')->with('error', 'Your account has been rejected. Reason: ' . $user->message);
+            }
             if (!$user->verified) {
                 Auth::logout();
                 return redirect()->route('guest.login')->with('error', 'Your Account Has not Being Verified.');
             }
+            
+            
 
             // Cek apakah pengguna adalah admin
             if ($user->is_admin) {
