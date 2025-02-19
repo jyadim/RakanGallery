@@ -28,7 +28,7 @@ class AlbumController extends Controller
         // Check if photos are empty and pass the result to the view
 
         // Pass the photos and album to the view
-        return view('detailPicture', compact('album'));
+        return view('detailPicture', compact('album', 'photos'));
     }
 
 
