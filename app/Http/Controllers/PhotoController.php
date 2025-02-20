@@ -29,29 +29,34 @@ class PhotoController extends Controller
     }
 
     public function store_comments(Request $request)
-    {
-        $request->validate([
-            'comments' => 'required|string|max:255',
-            'photo_id' => 'required|integer|exists:photos,id',
-            'parent_id' => 'nullable|integer|exists:comments,id',
-        ]);
+{
+    if (!Auth::check()) {
+        return redirect()->route('guest.login')->with('error', 'You must log in to comment.');
+    }
 
-        $comment = Comment::create([
-            'comments' => $request->comments,
-            'upload_date' => Carbon::now()->format('Y-m-d'),
-            'photo_id' => $request->photo_id,
-            'parent_id' => $request->parent_id,
-            'user_id' => auth()->id(),
-        ]);
+    $request->validate([
+        'comments' => 'required|string|max:255',
+        'photo_id' => 'required|integer|exists:photos,id',
+        'parent_id' => 'nullable|integer|exists:comments,id',
+    ]);
 
-        // Kirim notifikasi ke pemilik foto
+    $comment = Comment::create([
+        'comments' => $request->comments,
+        'upload_date' => Carbon::now()->format('Y-m-d'),
+        'photo_id' => $request->photo_id,
+        'parent_id' => $request->parent_id,
+        'user_id' => auth()->id(),
+    ]);
+
+    // Check if the photo exists before accessing its owner
+    if ($comment->photo) {
         $photoOwner = $comment->photo->user;
         $currentUser = Auth::user();
 
-        if ($photoOwner->id !== Auth::id()) {
+        if ($photoOwner && $photoOwner->id !== Auth::id()) {
             Notification::create([
-                'notifiable_type' => User::class,  // Model yang menerima notifikasi
-                'notifiable_id' => $photoOwner->id, // ID pengguna yang menerima notifikasi
+                'notifiable_type' => User::class,
+                'notifiable_id' => $photoOwner->id,
                 'type' => 'comment',
                 'data' => json_encode([
                     'message' => "{$currentUser->username} Commented on Your Photo",
@@ -59,14 +64,16 @@ class PhotoController extends Controller
                 ]),
             ]);
         }
-
-        return redirect()->back()->with('success', 'Comment added successfully.');
     }
+
+    return redirect()->back()->with('success', 'Comment added successfully.');
+}
 
     public function like($id)
     {
         $photo = Photo::findOrFail($id);
         $user = Auth::user();
+
 
         // Cek apakah user sudah memberikan like sebelumnya
         $existingLike = Like::where('photo_id', $photo->id)->where('user_id', $user->id)->first();
@@ -100,8 +107,11 @@ class PhotoController extends Controller
 
             $message = 'You have liked the photo.';
         }
-
+        if (!Auth::check()) {
+            return redirect()->route('guest.login')->with('error', 'You must log in to like a photo.');
+        }else{
         return redirect()->back()->with('success', $message);
+    }
     }
 
     public function update(Request $request, $id)

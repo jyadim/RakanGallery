@@ -12,8 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware ->redirectTo(
-            guests: 'user/login',
-            users: 'user/dashboard',
+            guests: '/', // Guest diarahkan ke dashboard
+            users: 'user/dashboard',  // User login juga ke dashboard
         );
     })
     ->withExceptions(function (Exceptions $exceptions) {

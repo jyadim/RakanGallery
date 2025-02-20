@@ -34,7 +34,7 @@
 
     <div class="footer">
         <p>Demikian laporan ini dibuat untuk digunakan sebagaimana mestinya.</p>
-        <p>Hormat kami,</p>
+        <p>Hormat kami,</p><br><br>
         <p><strong>Admin KENNGALLERY</strong></p>
     </div>
 </body>

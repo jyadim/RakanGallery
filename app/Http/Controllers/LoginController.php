@@ -15,7 +15,7 @@ class LoginController extends Controller
     {
 
         if (Auth::check()) {
-            return redirect()->route('guest.dashboard');
+            return redirect()->route('dashboard');
         }
 
         return view('login'); // Ganti dengan nama view yang sesuai
@@ -49,8 +49,8 @@ class LoginController extends Controller
                 Auth::logout();
                 return redirect()->route('guest.login')->with('error', 'Your Account Has not Being Verified.');
             }
-            
-            
+
+
 
             // Cek apakah pengguna adalah admin
             if ($user->is_admin) {

@@ -15,54 +15,75 @@
 
         <!-- Navigation Links -->
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul
-                class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                @if (auth()->user()->is_admin)
-                    <!-- Admin Menu -->
-                    <li>
-                        <x-navlink href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
-                            Admin Dashboard
-                        </x-navlink>
-                    </li>
-                    <li>
-                        <x-navlink href="{{ route('admin.profile') }}" :active="request()->routeIs('admin.profile')">
-                            Profile
-                        </x-navlink>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.downloadReport') }}"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Download Laporan PDF
-                        </a>
+            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50
+                md:flex-row md:space-x-4 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800
+                md:dark:bg-gray-900 dark:border-gray-700">
 
-                    </li>
+                @auth
+                    @if (auth()->user()->is_admin)
+                        <!-- Admin Menu -->
+                        <li>
+                            <x-navlink href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
+                                Admin Dashboard
+                            </x-navlink>
+                        </li>
+                        <li>
+                            <x-navlink href="{{ route('admin.profile') }}" :active="request()->routeIs('admin.profile')">
+                                Profile
+                            </x-navlink>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.downloadReport') }}"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Download Laporan PDF
+                            </a>
+                        </li>
+                    @else
+                        <!-- User Menu -->
+                        <li>
+                            <x-navlink href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                                Home
+                            </x-navlink>
+                        </li>
+                        <li>
+                            <x-navlink href="{{ route('profile') }}" :active="request()->routeIs('profile')">
+                                Profile
+                            </x-navlink>
+                        </li>
+                        <li class="relative">
+                            <a href="{{ route('notifications') }}"
+                                class="block py-2 px-3 text-gray-900 rounded relative hover:bg-gray-100
+                                md:hover:bg-transparent md:border-0 md:p-0 dark:text-white md:dark:hover:text-blue-500
+                                dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                </svg>
+                                <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-semibold
+                                    px-1.5 py-0.5 rounded-full" id="notif-count">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            </a>
+                        </li>
+                    @endif
                 @else
-                    <!-- User Menu -->
+                    <!-- Guest Menu -->
                     <li>
-                        <x-navlink href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">Home</x-navlink>
-                    </li>
-                    <li>
-                        <x-navlink href="{{ route('profile') }}" :active="request()->routeIs('profile')">Profile</x-navlink>
-                    </li>
-                    <li class="relative">
-                        <a href="{{ route('notifications') }}"
-                            class="block py-2 px-3 text-gray-900 rounded relative hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
-                                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                            </svg>
-                            <span
-                                class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
-                                id="notif-count">
-                                {{ auth()->user()->unreadNotifications->count() }}
-                            </span>
+                        <a href="{{ route('guest.login') }}"
+                            class="text-gray-900 dark:text-white font-medium py-2 px-4 rounded hover:bg-gray-200
+                            dark:hover:bg-gray-700">
+                            Sign In
                         </a>
                     </li>
-                @endif
+                    <li>
+                        <a href="{{ route('guest.register') }}"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Sign Up
+                        </a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
 </nav>
-
-<!-- Navlink Component -->

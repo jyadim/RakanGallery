@@ -11,9 +11,9 @@ use App\Http\Controllers\NotificationController;
 use App\Models\Album;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return redirect()->route('guest.login');
-});
+Route::get('/', [HomeController::class, 'index'])->name('guest.dashboard');
+Route::get('photo/{slug}', [PhotoController::class, 'show'])->name('guest.detail.photo');
+
 
 // 🛑 Admin Routes (Hanya Admin)
 Route::prefix('admin')->middleware('auth', 'admin')->group(function(){
