@@ -85,22 +85,9 @@
         </div>
     </div>
 
-    {{-- <div class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8">
-        <div class="inline-flex items-center">
-            <span class="size-2.5 inline-block bg-blue-600 rounded-sm me-2"></span>
-            <span class="text-[13px] text-gray-600">
-                Like
-            </span>
-        </div>
-        <div class="inline-flex items-center">
-            <span class="size-2.5 inline-block bg-purple-600 rounded-sm me-2"></span>
-            <span class="text-[13px] text-gray-600">
-                Comment
-            </span>
-        </div>
-    </div>
-    <div id="hs-multiple-area-charts"></div>
-    <script>
+
+    <div id="hs-multiple-area-charts" class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8"></div>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var options = {
                 chart: {
@@ -114,15 +101,13 @@
                     }
                 },
                 series: [{
-                        name: 'Income',
-                        data: [18000, 51000, 60000, 38000, 88000, 50000, 40000, 52000, 88000, 80000, 60000,
-                            70000
+                        name: 'Like',
+                        data: [6, 1, 0, 1
                         ]
                     },
                     {
-                        name: 'Outcome',
-                        data: [27000, 38000, 60000, 77000, 40000, 50000, 49000, 29000, 42000, 27000, 42000,
-                            50000
+                        name: 'Comment',
+                        data: [6, 1, 0, 3
                         ]
                     }
                 ],
