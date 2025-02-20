@@ -15,14 +15,14 @@
 </head>
 <body>
     <div class="header">
-        <p>K3NNGALLERY</p>
+        <p>KennGallery</p>
         <p><strong>POPULAR POSTS REPORT</strong></p>
         <p>{{ $date }}</p>
     </div>
 
     <div class="content">
         <p>To,</p>
-        <p><strong>K3NNGALLERY</strong></p>
+        <p><strong>KennGallery</strong></p>
         <p>Below is the report of posts with the highest interactions:</p>
 
         <h3>1. Most Liked Posts</h3>
@@ -57,7 +57,7 @@
     <div class="footer">
         <p>This report is created for reference as needed.</p>
         <p>Best regards,</p><br><br>
-        <p><strong> {{ $admin_name }} | Admin K3NNGALLERY</strong></p>
+        <p><strong> {{ $admin_name }} | Admin KennGallery</strong></p>
     </div>
 </body>
 </html>

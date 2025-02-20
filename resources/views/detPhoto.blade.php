@@ -7,7 +7,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>KennGallery</title>
+    <title>KennGallery</title>
 </head>
 
 <body>
@@ -48,33 +48,33 @@
                             <div class="flex items-center space-x-4">
                                 <!-- Like Button -->
                                 @if (auth()->check())
-                                <form action="{{ route('photo.like', $photo->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="flex items-center {{ auth()->user() && $photo->likes->where('user_id', auth()->id())->count() ? 'text-red-500' : 'text-gray-700' }} hover:text-red-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                    <form action="{{ route('photo.like', $photo->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="flex items-center {{ auth()->user() && $photo->likes->where('user_id', auth()->id())->count() ? 'text-red-500' : 'text-gray-700' }} hover:text-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
                 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09
                 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4
                 6.86-8.55 11.54L12 21.35z" @if (auth()->user() && $photo->likes->where('user_id', auth()->id())->count()) fill="currentColor" @endif />
-                                        </svg>
-                                        <span class="ml-1 text-sm font-medium">{{ $photo->likes->count() }}</span>
-                                    </button>
-                                </form>
-                            @else
-                                <button class="flex items-center text-gray-700 cursor-not-allowed opacity-50"
-                                    title="Login to like">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                                            </svg>
+                                            <span class="ml-1 text-sm font-medium">{{ $photo->likes->count() }}</span>
+                                        </button>
+                                    </form>
+                                @else
+                                    <button class="flex items-center text-gray-700 cursor-not-allowed opacity-50"
+                                        title="Login to like">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
                                                 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09
                                                 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4
                                                 6.86-8.55 11.54L12 21.35z" />
-                                    </svg>
-                                    <span class="ml-1 text-sm font-medium">{{ $photo->likes->count() }}</span>
-                                </button>
-                            @endif
+                                        </svg>
+                                        <span class="ml-1 text-sm font-medium">{{ $photo->likes->count() }}</span>
+                                    </button>
+                                @endif
 
                                 <!-- Comment Count -->
 
@@ -120,7 +120,11 @@
                                             @endif
                                         </div>
                                         <div class="text-xs text-gray-500 mb-2">
-                                            <i class="fa fa-clock"></i> {{ $comment->created_at->diffForHumans() }}
+                                            @if ($comment->created_at->diffInDays(now()) > 2)
+                                                <i class="fa fa-clock"></i> {{ $comment->created_at->format('d M Y') }}
+                                            @else
+                                                <i class="fa fa-clock"></i> {{ $comment->created_at->diffForHumans() }}
+                                            @endif
                                         </div>
                                         <p class="text-sm text-gray-700 whitespace-pre-wrap">{!! nl2br(e($comment->comments)) !!}</p>
 
@@ -156,8 +160,13 @@
                                                                 {{ $reply->user->username }}
                                                             </div>
                                                             <div class="text-xs text-gray-500 mb-2">
-                                                                <i class="fa fa-clock"></i>
-                                                                {{ $reply->created_at->diffForHumans() }}
+                                                                @if ($comment->created_at->diffInDays(now()) > 2)
+                                                                    <i class="fa fa-clock"></i>
+                                                                    {{ $comment->created_at->format('d M Y') }}
+                                                                @else
+                                                                    <i class="fa fa-clock"></i>
+                                                                    {{ $comment->created_at->diffForHumans() }}
+                                                                @endif
                                                             </div>
                                                             <p class="text-sm text-gray-700 ">
                                                                 {!! nl2br(e($reply->comments)) !!}

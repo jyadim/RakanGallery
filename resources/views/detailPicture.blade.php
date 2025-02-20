@@ -30,7 +30,7 @@
             </h1>
             <div class="h-1 w-60 bg-blue-700 rounded"></div>
         </div>
-        <div class="flex flex-col items-start gap-4 mt-6 justify-between">
+        <div class="flex flex-col items-start gap-4  justify-between">
             <!-- Button to open the create album form -->
             <button id="openFormButton"
                 class="flex items-center text-indigo-700 border border-indigo-600 py-2 px-6 gap-2 rounded">
@@ -100,7 +100,7 @@
             <p class="text-lg text-gray-700">No photos available. Please add new photos to display.</p>
         </div>
     @else
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-20 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 px-20 py-2">
             @foreach ($photos as $pict)
                 <div class="grid gap-4 bg-white rounded-lg shadow-lg p-4">
                     <div>
@@ -129,7 +129,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="mt-6 flex justify-center">
+        <div class="mt-6 mb-8 flex justify-center">
             {{ $photos->links() }}
         </div>
     @endif
