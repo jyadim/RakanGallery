@@ -42,6 +42,7 @@ Route::prefix('user')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::get('album/{slug}', [AlbumController::class, 'index'])->name('detail.album');
+        Route::get('album/{slug}/download-report', [AlbumController::class, 'downloadReport'])->name('album.downloadReport');
         Route::get('photo/{slug}', [PhotoController::class, 'show'])->name('detail.photo');
         Route::post('photo/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
         Route::delete('photo/delete/{id}', [PhotoController::class, 'destroy'])->name('photo.destroy');

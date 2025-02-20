@@ -32,10 +32,13 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
-            <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">
+            <h1 class="sm:text-4xl text-5xl font-medium title-font mb-6 text-gray-900">
                 {{ $album->album_name }}'s Album
             </h1>
-            <div class="h-1 w-60 bg-blue-700 rounded"></div>
+            <a href="{{ route('album.downloadReport', ['slug' => $album->slug, 'filter' => 'likes']) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Download Report (Most Like Content)</a>
+
+            <a href="{{ route('album.downloadReport', ['slug' => $album->slug, 'filter' => 'comments']) }}" class="bg-green-500 text-white px-4 py-2 rounded">Download Report (Most Commented Content)</a>
+            
         </div>
 
         <div class="flex flex-col items-start gap-4  justify-between">

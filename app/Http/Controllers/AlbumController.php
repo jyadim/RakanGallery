@@ -7,6 +7,7 @@ use App\Models\Photo;
 use App\Models\Album;
 use App\Models\Comment;
 use App\Models\Like;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -27,16 +28,19 @@ class AlbumController extends Controller
             return redirect()->route('profile')->with('error', 'Album not found.');
         }
 
-        // Check if photos are empty and pass the result to the view
-        $photos = $album->Photo()->paginate(4);
+        // Ambil semua photo_id dalam album ini
+        $photoIds = $album->Photo->pluck('id');
+
+        // Ambil data like berdasarkan photo_id dalam album
         $likes = Like::selectRaw('DATE(created_at) as date, COUNT(*) as total')
-            ->whereNotNull('photo_id') // Sesuaikan dengan kolom yang menyimpan like
+            ->whereIn('photo_id', $photoIds)
             ->groupBy('date')
             ->orderBy('date', 'asc')
             ->pluck('total', 'date');
 
+        // Ambil data komentar berdasarkan photo_id dalam album
         $comments = Comment::selectRaw('DATE(created_at) as date, COUNT(*) as total')
-            ->whereNotNull('photo_id') // Sesuaikan dengan kolom yang menyimpan komentar
+            ->whereIn('photo_id', $photoIds)
             ->groupBy('date')
             ->orderBy('date', 'asc')
             ->pluck('total', 'date');
@@ -46,9 +50,14 @@ class AlbumController extends Controller
 
         $likeData = $dates->map(fn($date) => $likes[$date] ?? 0)->toArray();
         $commentData = $dates->map(fn($date) => $comments[$date] ?? 0)->toArray();
-        // Pass the photos and album to the view
+
+        // Ambil foto dalam album (paginate 4 per halaman)
+        $photos = $album->Photo()->paginate(4);
+
+        // Kirim data ke view
         return view('detailPicture', compact('album', 'photos', 'likeData', 'commentData', 'dates'));
     }
+
 
 
     public function upload(Request $request, $slug)
@@ -130,4 +139,49 @@ class AlbumController extends Controller
 
         return view('detailPicture', compact('dates', 'likeData', 'commentData'));
     }
+
+
+
+    
+    public function downloadReport($slug, Request $request)
+    {
+        // Ambil album berdasarkan slug
+        $album = Album::where('slug', $slug)->with('Photo')->firstOrFail();
+        
+        // Ambil semua photo_id dalam album
+        $photoIds = $album->Photo->pluck('id');
+    
+        // Filter berdasarkan like atau comment (jika ada)
+        $filter = $request->get('filter'); // 'likes' atau 'comments'
+    
+        if ($filter == 'likes') {
+            $photos = Photo::whereIn('id', $photoIds)
+                ->withCount('likes')
+                ->orderByDesc('likes_count')
+                ->get();
+        } elseif ($filter == 'comments') {
+            $photos = Photo::whereIn('id', $photoIds)
+                ->withCount('comments')
+                ->orderByDesc('comments_count')
+                ->get();
+        } else {
+            // Default, ambil semua foto tanpa filter
+            $photos = Photo::whereIn('id', $photoIds)->get();
+        }
+    
+        // Data untuk dikirim ke PDF
+        $data = [
+            'date' => Carbon::now()->translatedFormat('d F Y'),
+            'admin_name' => auth()->user()->name,
+            'album' => $album,
+            'photos' => $photos,
+            'filter' => $filter
+        ];
+    
+        // Buat PDF
+        $pdf = Pdf::loadView('pdf.album_report', $data);
+    
+        return $pdf->download('Album_Report.pdf');
+    }
+    
 }
