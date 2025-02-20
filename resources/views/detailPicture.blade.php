@@ -86,7 +86,7 @@
     </div>
 
 
-    <div id="hs-multiple-area-charts" class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8"></div>
+    <div id="hs-curved-area-charts" class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -112,7 +112,7 @@
                 }
             };
 
-            var chart = new ApexCharts(document.querySelector("#hs-multiple-area-charts"), options);
+            var chart = new ApexCharts(document.querySelector("#hs-curved-area-charts"), options);
             chart.render();
         });
     </script>
