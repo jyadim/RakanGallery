@@ -8,12 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>KennGallery</title>
+
 </head>
 
 <body>
     <x-navbar></x-navbar>
 
-    <div class="w-full mb-6 lg:mb-0 flex flex-col items-start gap-4 px-14 lg:px-20 lg:py-16"> <!-- Added padding -->
+    <div class="w-full mb-6 lg:mb-0 flex flex-col items-start gap-4 px-14 lg:px-20 lg:py-6"> <!-- Added padding -->
         <div>
             @if (Session::has('success'))
                 <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
