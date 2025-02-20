@@ -7,14 +7,20 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>KennGallery</title>
+    <title>KennGallery</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
 
 </head>
 
 <body>
     <x-navbar></x-navbar>
+    <!-- Legend Indicator -->
 
-    <div class="w-full mb-6 lg:mb-0 flex flex-col items-start gap-4 px-14 lg:px-20 lg:py-6"> <!-- Added padding -->
+    <!-- End Legend Indicator -->
+
+
+    <div class="w-full mb-6 lg:mb-0 flex flex-col items-start gap-4 px-20 lg:px-20 lg:py-6"> <!-- Added padding -->
         <div>
             @if (Session::has('success'))
                 <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
@@ -31,6 +37,7 @@
             </h1>
             <div class="h-1 w-60 bg-blue-700 rounded"></div>
         </div>
+
         <div class="flex flex-col items-start gap-4  justify-between">
             <!-- Button to open the create album form -->
             <button id="openFormButton"
@@ -78,7 +85,59 @@
         </div>
     </div>
 
+    {{-- <div class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8">
+        <div class="inline-flex items-center">
+            <span class="size-2.5 inline-block bg-blue-600 rounded-sm me-2"></span>
+            <span class="text-[13px] text-gray-600">
+                Like
+            </span>
+        </div>
+        <div class="inline-flex items-center">
+            <span class="size-2.5 inline-block bg-purple-600 rounded-sm me-2"></span>
+            <span class="text-[13px] text-gray-600">
+                Comment
+            </span>
+        </div>
+    </div>
+    <div id="hs-multiple-area-charts"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var options = {
+                chart: {
+                    height: 300,
+                    type: 'area',
+                    toolbar: {
+                        show: false
+                    },
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                series: [{
+                        name: 'Income',
+                        data: [18000, 51000, 60000, 38000, 88000, 50000, 40000, 52000, 88000, 80000, 60000,
+                            70000
+                        ]
+                    },
+                    {
+                        name: 'Outcome',
+                        data: [27000, 38000, 60000, 77000, 40000, 50000, 49000, 29000, 42000, 27000, 42000,
+                            50000
+                        ]
+                    }
+                ],
+                xaxis: {
+                    categories: [
+                        '25 Jan', '26 Jan', '27 Jan', '28 Jan', '29 Jan', '30 Jan', '31 Jan',
+                        '1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb'
+                    ]
+                }
+            };
 
+            var chart = new ApexCharts(document.querySelector("#hs-multiple-area-charts"), options);
+            chart.render();
+        });
+    </script> --}}
     <!-- Hidden Create Album Form -->
 
 
@@ -134,6 +193,7 @@
             {{ $photos->links() }}
         </div>
     @endif
+
 
 
 </body>
