@@ -1,41 +1,63 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Postingan Populer</title>
+    <title>Popular Posts Report</title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 12pt; }
         .header { text-align: center; font-weight: bold; font-size: 14pt; }
         .content { margin: 20px 0; }
         .footer { margin-top: 40px; font-size: 10pt; }
-        .bold { font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
     <div class="header">
-        <p>KENNGALLERY</p>
-        <p><strong>LAPORAN POSTINGAN POPULER</strong></p>
+        <p>K3NNGALLERY</p>
+        <p><strong>POPULAR POSTS REPORT</strong></p>
         <p>{{ $date }}</p>
     </div>
 
     <div class="content">
-        <p>Kepada Yth,</p>
-        <p><strong>Admin {{ $admin_name }}</strong></p>
-        <p>Berikut adalah laporan postingan yang memiliki interaksi terbanyak:</p>
+        <p>To,</p>
+        <p><strong>K3NNGALLERY</strong></p>
+        <p>Below is the report of posts with the highest interactions:</p>
 
-        <h3>1. Postingan dengan Like Terbanyak</h3>
-        <p><span class="bold">Judul:</span> {{ $mostLikedPost->photo_name ?? '-' }}</p>
-        <p><span class="bold">Total Like:</span> {{ $mostLikedPost->likes_count ?? 0 }}</p>
+        <h3>1. Most Liked Posts</h3>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Total Likes</th>
+            </tr>
+            @foreach($mostLikedPosts->take(5) as $post)
+            <tr>
+                <td>{{ $post->photo_name ?? '-' }}</td>
+                <td>{{ $post->likes_count ?? 0 }}</td>
+            </tr>
+            @endforeach
+        </table>
 
-        <h3>2. Postingan dengan Komentar Terbanyak</h3>
-        <p><span class="bold">Judul:</span> {{ $mostCommentedPost->photo_name ?? '-' }}</p>
-        <p><span class="bold">Total Komentar:</span> {{ $mostCommentedPost->comments_count ?? 0 }}</p>
+        <h3>2. Most Commented Posts</h3>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Total Comments</th>
+            </tr>
+            @foreach($mostCommentedPosts->take(5) as $post)
+            <tr>
+                <td>{{ $post->photo_name ?? '-' }}</td>
+                <td>{{ $post->comments_count ?? 0 }}</td>
+            </tr>
+            @endforeach
+        </table>
     </div>
 
     <div class="footer">
-        <p>Demikian laporan ini dibuat untuk digunakan sebagaimana mestinya.</p>
-        <p>Hormat kami,</p><br><br>
-        <p><strong>Admin KENNGALLERY</strong></p>
+        <p>This report is created for reference as needed.</p>
+        <p>Best regards,</p><br><br>
+        <p><strong> {{ $admin_name }} | Admin K3NNGALLERY</strong></p>
     </div>
 </body>
 </html>

@@ -33,19 +33,19 @@ class AdminController extends Controller
     public function rejectUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
-    
+
         // Validasi input alasan penolakan
         $request->validate([
             'reason' => 'required|string|max:255',
         ]);
-    
+
         // Simpan status dan alasan penolakan
         $user->update([
             'rejected' => true,
             'status' => 'rejected',
             'message' => $request->input('reason'),
         ]);
-    
+
         // Flash message untuk notifikasi di frontend
         return redirect()->route('admin.dashboard')->with('message', 'User Has Been Rejected Successfully.');
     }
@@ -55,25 +55,25 @@ class AdminController extends Controller
     public function downloadReport()
     {
         // Ambil post dengan like terbanyak
-        $mostLikedPost = Photo::withCount('likes')->orderByDesc('likes_count')->first();
-    
+        $mostLikedPosts = Photo::withCount('likes')->orderByDesc('likes_count')->get();
+
         // Ambil post dengan komentar terbanyak
-        $mostCommentedPost = Photo::withCount('comments')->orderByDesc('comments_count')->first();
-    
+        $mostCommentedPosts = Photo::withCount('comments')->orderByDesc('comments_count')->get();
+
         // Data untuk dikirim ke view PDF
         $data = [
             'date' => Carbon::now()->translatedFormat('d F Y'),
             'admin_name' => auth()->user()->name,
-            'mostLikedPost' => $mostLikedPost,
-            'mostCommentedPost' => $mostCommentedPost,
+            'mostLikedPosts' => $mostLikedPosts,
+            'mostCommentedPosts' => $mostCommentedPosts,
         ];
-    
+
         // Gunakan instance PDF
         $pdf = app()->make('dompdf.wrapper');
         $pdf->loadView('pdf', $data);
-        
-        return $pdf->download('Laporan_Postingan_Populer.pdf');
+
+        return $pdf->download('POPULAR_POSTS_REPORT.pdf');
     }
-    
+
 
 }
