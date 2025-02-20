@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
 
-     <title>KennGallery</title>
+    <title>KennGallery</title>
 </head>
 
 <body>
@@ -51,195 +51,196 @@
 
 
                 <!-- Edit Profile Form -->
-@if (auth()->user()->is_admin)
-<form action="{{ route('admin.edit.profile.proccess') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <section class="py-16 my-auto dark:bg-gray-900">
-        <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
-            <div
-                class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
-                <h1
-                    class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
-                    Profile
-                </h1>
-                <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Edit Profile</h2>
+                @if (auth()->user()->is_admin)
+                    <form action="{{ route('admin.edit.profile.proccess') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <section class="py-16 my-auto dark:bg-gray-900">
+                            <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
+                                <div
+                                    class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
+                                    <h1
+                                        class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
+                                        Profile
+                                    </h1>
+                                    <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Edit Profile</h2>
 
-                <!-- Profile and Cover Image -->
-                <div
-                    class="w-full rounded-sm relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700 bg-cover bg-center bg-no-repeat items-center">
-                    <!-- Profile Image -->
-                    <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative"
-                        id="profile-image-container">
-                        <!-- Profile Image Preview -->
+                                    <!-- Profile and Cover Image -->
+                                    <div
+                                        class="w-full rounded-sm relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700 bg-cover bg-center bg-no-repeat items-center">
+                                        <!-- Profile Image -->
+                                        <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative"
+                                            id="profile-image-container">
+                                            <!-- Profile Image Preview -->
 
-                        <img id="profile-preview"
-                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
-                            alt="Profile Image" class="rounded-full w-full h-full object-cover">
+                                            <img id="profile-preview"
+                                                src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
+                                                alt="Profile Image" class="rounded-full w-full h-full object-cover">
 
-                        <!-- Input for Image Upload -->
-                        <div
-                            class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
-                            <input type="file" name="profile" id="upload_profile" hidden
-                                onchange="previewImage(event)">
-                            <label for="upload_profile">
-                                <svg class="w-6 h-5 text-blue-700" fill="none" stroke-width="1.5"
-                                    stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z">
-                                    </path>
-                                </svg>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                                            <!-- Input for Image Upload -->
+                                            <div
+                                                class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
+                                                <input type="file" name="profile" id="upload_profile" hidden
+                                                    onchange="previewImage(event)">
+                                                <label for="upload_profile">
+                                                    <svg class="w-6 h-5 text-blue-700" fill="none" stroke-width="1.5"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z">
+                                                        </path>
+                                                    </svg>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <!-- Name Fields -->
-                <div
-                    class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-                    <div class="w-full  mb-4 mt-6">
-                        <label for="name" class="mb-2 dark:text-gray-300">Name</label>
-                        <input type="text" name="name" id="name"
-                            value="{{ old('name', auth()->user()->name) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Name">
-                    </div>
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="username" class=" dark:text-gray-300">Username</label>
-                        <input type="text" name="username" id="username"
-                            value="{{ old('username', auth()->user()->username) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Username">
-                    </div>
-                </div>
+                                    <!-- Name Fields -->
+                                    <div
+                                        class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                                        <div class="w-full  mb-4 mt-6">
+                                            <label for="name" class="mb-2 dark:text-gray-300">Name</label>
+                                            <input type="text" name="name" id="name"
+                                                value="{{ old('name', auth()->user()->name) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Name">
+                                        </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="username" class=" dark:text-gray-300">Username</label>
+                                            <input type="text" name="username" id="username"
+                                                value="{{ old('username', auth()->user()->username) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Username">
+                                        </div>
+                                    </div>
 
-                <!-- Sex and Date of Birth -->
-                <div
-                    class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                                    <!-- Sex and Date of Birth -->
+                                    <div
+                                        class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
 
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="address" class=" dark:text-gray-300">address</label>
-                        <input type="text" name="address" id="address"
-                            value="{{ old('address', auth()->user()->address) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Address">
-                    </div>
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="status" class=" dark:text-gray-300">Bio</label>
-                        <input type="text" name="status" id="status"
-                            value="{{ old('status', auth()->user()->bio) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Bio">
-                    </div>
-                </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="address" class=" dark:text-gray-300">address</label>
+                                            <input type="text" name="address" id="address"
+                                                value="{{ old('address', auth()->user()->address) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Address">
+                                        </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="status" class=" dark:text-gray-300">Bio</label>
+                                            <input type="text" name="status" id="status"
+                                                value="{{ old('status', auth()->user()->bio) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Bio">
+                                        </div>
+                                    </div>
 
-                <!-- Submit Button -->
-                <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                    <button type="submit" class="w-full p-4">Submit</button>
+                                    <!-- Submit Button -->
+                                    <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
+                                        <button type="submit" class="w-full p-4">Submit</button>
 
-                </div>
-            </div>
-        </div>
-    </section>
-</form>
-@else
-<form action="{{ route('edit.profile.proccess') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <section class="py-16 my-auto dark:bg-gray-900">
-        <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
-            <div
-                class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
-                <h1
-                    class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
-                    Profile
-                </h1>
-                <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Edit Profile</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                @else
+                    <form action="{{ route('edit.profile.proccess') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <section class="py-16 my-auto dark:bg-gray-900">
+                            <div class="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
+                                <div
+                                    class="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
+                                    <h1
+                                        class="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
+                                        Profile
+                                    </h1>
+                                    <h2 class="text-grey text-sm mb-4 dark:text-gray-400">Edit Profile</h2>
 
-                <!-- Profile and Cover Image -->
-                <div
-                    class="w-full rounded-sm relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700 bg-cover bg-center bg-no-repeat items-center">
-                    <!-- Profile Image -->
-                    <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative"
-                        id="profile-image-container">
-                        <!-- Profile Image Preview -->
+                                    <!-- Profile and Cover Image -->
+                                    <div
+                                        class="w-full rounded-sm relative h-32 bg-gradient-to-r from-indigo-600 to-blue-700 bg-cover bg-center bg-no-repeat items-center">
+                                        <!-- Profile Image -->
+                                        <div class="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-cover bg-center bg-no-repeat relative"
+                                            id="profile-image-container">
+                                            <!-- Profile Image Preview -->
 
-                        <img id="profile-preview"
-                            src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
-                            alt="Profile Image" class="rounded-full w-full h-full object-cover">
+                                            <img id="profile-preview"
+                                                src="{{ $item->image_path ? asset('storage/' . old('image_path', auth()->user()->image_path)) : asset('storage/profiles/Shoyo Hinata.jpg') }}"
+                                                alt="Profile Image" class="rounded-full w-full h-full object-cover">
 
-                        <!-- Input for Image Upload -->
-                        <div
-                            class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
-                            <input type="file" name="profile" id="upload_profile" hidden
-                                onchange="previewImage(event)">
-                            <label for="upload_profile">
-                                <svg class="w-6 h-5 text-blue-700" fill="none" stroke-width="1.5"
-                                    stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z">
-                                    </path>
-                                </svg>
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                                            <!-- Input for Image Upload -->
+                                            <div
+                                                class="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4 absolute top-0 right-0">
+                                                <input type="file" name="profile" id="upload_profile" hidden
+                                                    onchange="previewImage(event)">
+                                                <label for="upload_profile">
+                                                    <svg class="w-6 h-5 text-blue-700" fill="none"
+                                                        stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z">
+                                                        </path>
+                                                    </svg>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <!-- Name Fields -->
-                <div
-                    class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-                    <div class="w-full  mb-4 mt-6">
-                        <label for="name" class="mb-2 dark:text-gray-300">Name</label>
-                        <input type="text" name="name" id="name"
-                            value="{{ old('name', auth()->user()->name) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Name">
-                    </div>
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="username" class=" dark:text-gray-300">Username</label>
-                        <input type="text" name="username" id="username"
-                            value="{{ old('username', auth()->user()->username) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Username">
-                    </div>
-                </div>
+                                    <!-- Name Fields -->
+                                    <div
+                                        class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                                        <div class="w-full  mb-4 mt-6">
+                                            <label for="name" class="mb-2 dark:text-gray-300">Name</label>
+                                            <input type="text" name="name" id="name"
+                                                value="{{ old('name', auth()->user()->name) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Name">
+                                        </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="username" class=" dark:text-gray-300">Username</label>
+                                            <input type="text" name="username" id="username"
+                                                value="{{ old('username', auth()->user()->username) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Username">
+                                        </div>
+                                    </div>
 
-                <!-- Sex and Date of Birth -->
-                <div
-                    class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
+                                    <!-- Sex and Date of Birth -->
+                                    <div
+                                        class="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
 
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="address" class=" dark:text-gray-300">address</label>
-                        <input type="text" name="address" id="address"
-                            value="{{ old('address', auth()->user()->address) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Address">
-                    </div>
-                    <div class="w-full  mb-4 lg:mt-6">
-                        <label for="status" class=" dark:text-gray-300">Bio</label>
-                        <input type="text" name="status" id="status"
-                            value="{{ old('status', auth()->user()->bio) }}"
-                            class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                            placeholder="Bio">
-                    </div>
-                </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="address" class=" dark:text-gray-300">address</label>
+                                            <input type="text" name="address" id="address"
+                                                value="{{ old('address', auth()->user()->address) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Address">
+                                        </div>
+                                        <div class="w-full  mb-4 lg:mt-6">
+                                            <label for="status" class=" dark:text-gray-300">Bio</label>
+                                            <input type="text" name="status" id="status"
+                                                value="{{ old('status', auth()->user()->bio) }}"
+                                                class="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                                                placeholder="Bio">
+                                        </div>
+                                    </div>
 
-                <!-- Submit Button -->
-                <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                    <button type="submit" class="w-full p-4">Submit</button>
+                                    <!-- Submit Button -->
+                                    <div class="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
+                                        <button type="submit" class="w-full p-4">Submit</button>
 
-                </div>
-            </div>
-        </div>
-    </section>
-</form>
-@endif
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </form>
+                @endif
 
 
             </div>
@@ -279,15 +280,15 @@
                 <h1 class="sm:text-4xl text-5xl font-medium title-font mb-2 text-gray-900">Your Albums</h1>
                 <div class="h-1 w-60 bg-blue-700 rounded"></div>
                 @if (Session::has('success'))
-                <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
-                    {{ Session::get('success') }}
-                </div>
-            @endif
-            @if (Session::has('error'))
-                <div class="bg-red-500 text-white p-3 rounded mt-4 mb-2">
-                    {{ Session::get('error') }}
-                </div>
-            @endif
+                    <div class="bg-blue-700 text-white p-3 rounded mt-4 mb-2">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+                @if (Session::has('error'))
+                    <div class="bg-red-500 text-white p-3 rounded mt-4 mb-2">
+                        {{ Session::get('error') }}
+                    </div>
+                @endif
             </div>
             <!-- Button to open the create album form -->
             <button id="openFormButton"
@@ -349,97 +350,99 @@
     <div class="px-20 py-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($album as $bulma)
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
+                <div
+                    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
 
-        <!-- Check if album has at least one photo -->
-        @if ($bulma->Photo && $bulma->Photo->isNotEmpty())
-            <img class="rounded-t-lg w-full h-48 object-cover"
-                src="{{ asset('storage/' . $bulma->Photo->first()->image_path) }}"
-                alt="Download Image" />
-        @else
-            <p class="text-center text-gray-500">No photo available for this album.</p>
-        @endif
+                    <!-- Check if album has at least one photo -->
+                    @if ($bulma->Photo && $bulma->Photo->isNotEmpty())
+                        <img class="rounded-t-lg w-full h-48 object-cover"
+                            src="{{ asset('storage/' . $bulma->Photo->first()->image_path) }}"
+                            alt="Download Image" />
+                    @else
+                        <p class="text-center text-gray-500">No photo available for this album.</p>
+                    @endif
 
-        <div class="p-5">
-            <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {{ $bulma->album_name }}</h5>
-            </a>
-            <div class="flex justify-between items-center">
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $bulma->desc }}</p>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-right">
-                    {{ $bulma->upload_date }}</p>
-            </div>
-            <a href="{{ route('detail.album', ['slug' => $bulma->slug]) }}"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                View Album
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+                    <div class="p-5">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                {{ $bulma->album_name }}</h5>
+                        </a>
+                        <div class="flex justify-between items-center">
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $bulma->desc }}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 text-right">
+                                {{ $bulma->upload_date }}</p>
+                        </div>
+                        <a href="{{ route('detail.album', ['slug' => $bulma->slug]) }}"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            View Album
+                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
 
-            <!-- Edit and Delete Buttons -->
-            <div class="flex justify-between mt-4">
-                <!-- Edit Button -->
-                <button onclick="openUpdateForm('{{ $bulma->id }}', '{{ $bulma->album_name }}', '{{ $bulma->desc }}')"
-                    class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
-                    Edit
-                </button>
+                        <!-- Edit and Delete Buttons -->
+                        <div class="flex justify-between mt-4">
+                            <!-- Edit Button -->
+                            <button
+                                onclick="openUpdateForm('{{ $bulma->id }}', '{{ $bulma->album_name }}', '{{ $bulma->desc }}')"
+                                class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                                Edit
+                            </button>
 
-                <!-- Delete Button -->
-                <form action="{{ route('album.destroy', ['id' => $bulma->id]) }}" method="POST"
-                    onsubmit="return confirm('Are you sure you want to delete this album?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                        class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
-                        Delete
-                    </button>
-                </form>
-            </div>
-        </div>
+                            <!-- Delete Button -->
+                            <form action="{{ route('album.destroy', ['id' => $bulma->id]) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this album?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
-        <!-- Update Form Modal -->
-        <div id="updateForm-{{ $bulma->id }}"
-            class="hidden absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
-            <form action="{{ route('album.update', ['id' => $bulma->id]) }}" method="POST">
-                @csrf
-                @method('PUT')
+                    <!-- Update Form Modal -->
+                    <div id="updateForm-{{ $bulma->id }}"
+                        class="hidden absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
+                        <form action="{{ route('album.update', ['id' => $bulma->id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
 
-                <div class="mb-4">
-                    <label class="block text-gray-700">Album Name</label>
-                    <input type="text" name="album_name" value="{{ $bulma->album_name }}"
-                        class="w-full p-4 border border-indigo-600 rounded-lg" required>
+                            <div class="mb-4">
+                                <label class="block text-gray-700">Album Name</label>
+                                <input type="text" name="album_name" value="{{ $bulma->album_name }}"
+                                    class="w-full p-4 border border-indigo-600 rounded-lg" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700">Description</label>
+                                <input type="text" name="desc" value="{{ $bulma->desc }}"
+                                    class="w-full p-4 border border-indigo-600 rounded-lg">
+                            </div>
+
+                            <div class="flex justify-between items-center">
+                                <button type="submit"
+                                    class="py-2 px-6 bg-indigo-600 text-white rounded-lg">Update</button>
+                                <button type="button" onclick="closeUpdateForm('{{ $bulma->id }}')"
+                                    class="py-2 px-6 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Description</label>
-                    <input type="text" name="desc" value="{{ $bulma->desc }}"
-                        class="w-full p-4 border border-indigo-600 rounded-lg">
-                </div>
 
-                <div class="flex justify-between items-center">
-                    <button type="submit"
-                        class="py-2 px-6 bg-indigo-600 text-white rounded-lg">Update</button>
-                    <button type="button" onclick="closeUpdateForm('{{ $bulma->id }}')"
-                        class="py-2 px-6 bg-gray-300 text-gray-700 rounded-lg">Cancel</button>
-                </div>
-            </form>
-        </div>
+                <script>
+                    function openUpdateForm(id, title, desc) {
+                        document.getElementById(`updateForm-${id}`).classList.remove("hidden");
+                    }
 
-    </div>
-
-    <script>
-        function openUpdateForm(id, title, desc) {
-            document.getElementById(`updateForm-${id}`).classList.remove("hidden");
-        }
-
-        function closeUpdateForm(id) {
-            document.getElementById(`updateForm-${id}`).classList.add("hidden");
-        }
-    </script>
-@endforeach
+                    function closeUpdateForm(id) {
+                        document.getElementById(`updateForm-${id}`).classList.add("hidden");
+                    }
+                </script>
+            @endforeach
 
 
         </div>

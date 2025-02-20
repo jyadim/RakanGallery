@@ -48,7 +48,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
             'address' => 'required|string',
-            'status' => 'required|string',
+            'status' => 'nullable|string',
             'profile' => 'nullable|image|mimes:jpg,jpeg,png,gif',
         ]);
 
