@@ -87,42 +87,36 @@
 
 
     <div id="hs-multiple-area-charts" class="flex justify-center sm:justify-end items-center gap-x-4 mb-3 sm:mb-6 px-10 py-8"></div>
-    {{-- <script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var options = {
                 chart: {
                     height: 300,
                     type: 'area',
-                    toolbar: {
-                        show: false
-                    },
-                    zoom: {
-                        enabled: false
-                    }
+                    toolbar: { show: false },
+                    zoom: { enabled: false }
                 },
-                series: [{
+                series: [
+                    {
                         name: 'Like',
-                        data: [6, 1, 0, 1
-                        ]
+                        data: @json($likeData)
                     },
                     {
                         name: 'Comment',
-                        data: [6, 1, 0, 3
-                        ]
+                        data: @json($commentData)
                     }
                 ],
                 xaxis: {
-                    categories: [
-                        '25 Jan', '26 Jan', '27 Jan', '28 Jan', '29 Jan', '30 Jan', '31 Jan',
-                        '1 Feb', '2 Feb', '3 Feb', '4 Feb', '5 Feb'
-                    ]
+                    categories: @json($dates)
                 }
             };
 
             var chart = new ApexCharts(document.querySelector("#hs-multiple-area-charts"), options);
             chart.render();
         });
-    </script> --}}
+    </script>
+
     <!-- Hidden Create Album Form -->
 
 
